@@ -23,7 +23,7 @@ existentes em migração + 2 apps novos) devem começar daqui, não de uma cópi
 | `assets/` | Logos, ícone, favicons, apple-touch-icon, og-image | todos |
 | `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar ([versão publicada](https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA)) | quem vai rodar a migração |
 
-## As duas páginas
+## As duas páginas e o Artifact
 
 **`marca.dc.html` — pública.** Vai no ar em `rumbee.ai/marca`. Contém só o que qualquer
 pessoa de fora precisa: o conceito, os lockups, a paleta, a tipografia, o que pode e o que
@@ -34,6 +34,8 @@ interação — nada que revele como o app é construído.
 de verdade, nos dois temas, com os modais, o toast e os menus funcionando. É onde se
 confere um comportamento em dez segundos em vez de reler o `.md`. Mantém `noindex` e não
 vai para domínio público.
+
+**`https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA`- Instruções**
 
 ## Como usar
 
