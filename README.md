@@ -21,7 +21,7 @@ existentes em migração + 2 apps novos) devem começar daqui, não de uma cópi
 | `AI-AGENT.md` | Instruções operacionais para agentes de IA que geram código | **cole isto no prompt** |
 | `tokens.css` | Implementação dos tokens em CSS custom properties, dark + light | dev |
 | `assets/` | Logos, ícone, favicons, apple-touch-icon, og-image | todos |
-| `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar | quem vai rodar a migração |
+| `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar ([versão publicada](https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA)) | quem vai rodar a migração |
 
 ## As duas páginas
 
@@ -64,7 +64,8 @@ A ordem inversa gera meses de tela híbrida.
 ## Prompts prontos — migração dos 5 apps existentes + bootstrap dos 2 novos
 
 Cole um dos dois abaixo como primeira mensagem numa sessão nova do Claude Code no
-repositório do app-alvo. Versão em página, com botão de copiar: `migration-playbook.html`.
+repositório do app-alvo. Versão em página, com botão de copiar: `migration-playbook.html`
+(também publicada em https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA).
 
 ### Prompt A — app existente (retrofit 100%)
 
