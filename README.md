@@ -64,8 +64,7 @@ A ordem inversa gera meses de tela híbrida.
 ## Prompts prontos — migração dos 5 apps existentes + bootstrap dos 2 novos
 
 Cole um dos dois abaixo como primeira mensagem numa sessão nova do Claude Code no
-repositório do app-alvo (troque `<URL deste repo>` pelo link real deste repositório).
-Versão em página, com botão de copiar: `migration-playbook.html`.
+repositório do app-alvo. Versão em página, com botão de copiar: `migration-playbook.html`.
 
 ### Prompt A — app existente (retrofit 100%)
 
@@ -87,7 +86,7 @@ Antes de mudar qualquer coisa, leia e resuma (não mude nada ainda):
 
 ## Passo 2 — Traga o RumBee Brand Book pro repo
 
-Clone/copie o conteúdo de <URL deste repo> pra `docs/design-system/rumbee-brand/` (ou
+Clone/copie o conteúdo de https://github.com/docsales/rumbee-design-system pra `docs/design-system/rumbee-brand/` (ou
 o local equivalente de docs deste projeto): README.md, BRAND.md, DESIGN.md,
 INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*. Trate como material
 vendorizado — referência, não editar à mão.
@@ -141,7 +140,7 @@ Book, sem estilo ad hoc.
 
 ## Passo 1 — Traga o Brand Book antes de qualquer tela
 
-Clone/copie <URL deste repo> pra `docs/design-system/rumbee-brand/`. Leia
+Clone/copie https://github.com/docsales/rumbee-design-system pra `docs/design-system/rumbee-brand/`. Leia
 AI-AGENT.md primeiro (regras compactas) — é referência obrigatória antes de escrever
 qualquer componente visual.
 

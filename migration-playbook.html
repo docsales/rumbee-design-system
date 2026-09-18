@@ -165,9 +165,9 @@
   <p class="lede">Dois prompts prontos pra colar como primeira mensagem numa sessão nova do Claude Code em cada um dos outros apps — um pra retrofit de app existente, outro pra bootstrap de app novo. Baseado no processo que funcionou no RumBee Fin (vendorizar o brand book, apontar o CLAUDE.md sob demanda, auditar full-repo, corrigir em lotes com conferência ao vivo).</p>
 
   <div class="card">
-    <h2><span class="num">0</span>Antes de tudo: crie o repo dedicado do Brand Book</h2>
-    <p>Você decidiu centralizar o RumBee Brand Book num repo Git próprio (ex.: <code>rumbee/brand-book</code>) em vez de reanexar o zip em cada app — é o jeito certo pra manter os 7 apps sincronizados quando o brand book evoluir. Esse repo <strong>ainda não existe</strong>; um jeito rápido de criar a semente dele é extrair o que já está pronto e vendorizado em <code>docsales-fin-automation/docs/design-system/rumbee-brand/</code> (README, BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*) — já é o pacote original recebido, limpo e commitado.</p>
-    <p>Os dois prompts abaixo referenciam esse repo como <code class="ph">&lt;URL do rumbee-brand-book&gt;</code> — troque pelo link real antes de colar.</p>
+    <h2><span class="num">0</span>O repo dedicado do Brand Book já existe</h2>
+    <p>Centralizado em <code>docsales/rumbee-design-system</code> (privado) — README com o pacote completo (BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*, marca.dc.html, sistema.dc.html) e os dois prompts abaixo, prontos pra reusar quando o Brand Book evoluir.</p>
+    <p>Os dois prompts abaixo já apontam pra <code>https://github.com/docsales/rumbee-design-system</code>.</p>
   </div>
 
   <h2 class="section"><span class="badge a">Prompt A</span></h2>
@@ -186,7 +186,7 @@ Antes de mudar qualquer coisa, leia e resuma (não mude nada ainda):
 
 ## Passo 2 — Traga o RumBee Brand Book pro repo
 
-Clone/copie o conteúdo de <span class="ph">&lt;URL do rumbee-brand-book&gt;</span> pra <b>docs/design-system/rumbee-brand/</b> (ou o local equivalente de docs deste projeto): README.md, BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*. Trate como material vendorizado — referência, não editar à mão.
+Clone/copie o conteúdo de <span class="ph">https://github.com/docsales/rumbee-design-system</span> pra <b>docs/design-system/rumbee-brand/</b> (ou o local equivalente de docs deste projeto): README.md, BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*. Trate como material vendorizado — referência, não editar à mão.
 
 Aponte o arquivo de instruções do agente deste repo (CLAUDE.md/AGENTS.md) pra esse material, <b>sob demanda</b> (não auto-carregado) — AI-AGENT.md é o ponto de entrada (regras compactas), DESIGN.md/INTERACTIONS.md pro detalhe.
 
@@ -218,7 +218,7 @@ No final, AI-AGENT.md/DESIGN.md/INTERACTIONS.md do Brand Book devem ser a fonte 
 
 ## Passo 1 — Traga o Brand Book antes de qualquer tela
 
-Clone/copie <span class="ph">&lt;URL do rumbee-brand-book&gt;</span> pra <b>docs/design-system/rumbee-brand/</b>. Leia AI-AGENT.md primeiro (regras compactas) — é referência obrigatória antes de escrever qualquer componente visual.
+Clone/copie <span class="ph">https://github.com/docsales/rumbee-design-system</span> pra <b>docs/design-system/rumbee-brand/</b>. Leia AI-AGENT.md primeiro (regras compactas) — é referência obrigatória antes de escrever qualquer componente visual.
 
 ## Passo 2 — Wire os tokens
 
