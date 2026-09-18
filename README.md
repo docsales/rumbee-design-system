@@ -21,7 +21,7 @@ existentes em migração + 2 apps novos) devem começar daqui, não de uma cópi
 | `AI-AGENT.md` | Instruções operacionais para agentes de IA que geram código | **cole isto no prompt** |
 | `tokens.css` | Implementação dos tokens em CSS custom properties, dark + light | dev |
 | `assets/` | Logos, ícone, favicons, apple-touch-icon, og-image | todos |
-| `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar ([versão publicada](https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA)) | quem vai rodar a migração |
+| `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar | quem vai rodar a migração |
 
 ## As duas páginas e o Artifact
 
@@ -35,7 +35,7 @@ de verdade, nos dois temas, com os modais, o toast e os menus funcionando. É on
 confere um comportamento em dez segundos em vez de reler o `.md`. Mantém `noindex` e não
 vai para domínio público.
 
-**`https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA`- Instruções**
+**[Instruções](https://claude.ai/artifact/V9JcB5zxUVjN6LW3cdNENy?sk=WbKtHXIn6OpoG2G7LT5RGA)**
 
 ## Como usar
 
