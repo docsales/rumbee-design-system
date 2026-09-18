@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('rumbee-fin-theme');
+        var theme = (saved === 'light' || saved === 'dark')
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    body { margin: 0; }
+    .rb-wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+    .rb-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rb-radius-lg); }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--rb-font)">
+
+  <div style="position:sticky;top:0;z-index:30;background:var(--chrome);border-bottom:1px solid var(--rb-graf-700)">
+    <div class="rb-wrap" style="height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div style="display:flex;align-items:center;gap:14px;min-width:0">
+        <img src="assets/rumbee-logo-horizontal-light-text.png" alt="RumBee" style="height:16px;width:auto;object-fit:contain;flex-shrink:0" />
+        <span style="width:1px;height:20px;background:var(--rb-graf-700)"></span>
+        <span style="font-size:13px;font-weight:500;color:var(--rb-graf-400);white-space:nowrap">Sistema de design · referência interna</span>
+      </div>
+      <button onclick="{{ toggleTheme }}" style="height:36px;padding:0 15px;border-radius:var(--rb-radius-pill);border:1px solid var(--rb-graf-700);background:transparent;color:var(--rb-graf-400);font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap">
+        <span style="width:15px;height:15px;display:flex" dangerouslySetInnerHTML="{{ themeIcon }}"></span>
+        {{ themeLabel }}
+      </button>
+    </div>
+  </div>
+
+  <div class="rb-wrap" style="padding-top:32px;padding-bottom:64px;display:flex;flex-direction:column;gap:36px">
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-faint);margin-bottom:5px">Referência viva</div>
+      <h1 style="font-size:26px;font-weight:700;margin:0 0 8px">Componentes em uso</h1>
+      <p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--text-muted);max-width:660px;text-wrap:pretty">Tudo nesta página é o componente real, nos dois temas, com o comportamento descrito em <strong style="color:var(--text);font-weight:600">INTERACTIONS.md</strong>. Clique nos exemplos: os modais, o toast e os menus funcionam.</p>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Botões</div>
+      <div class="rb-card" style="padding:20px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+          <button style="height:38px;padding:0 18px;border-radius:var(--rb-radius-md);border:none;background:var(--accent);color:var(--accent-on);font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;box-shadow:var(--glow)">Ação primária</button>
+          <button style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Secundária</button>
+          <button style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:none;background:transparent;color:var(--text-muted);font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Fantasma</button>
+          <button style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:none;background:var(--err-fill);color:var(--err-on-fill);font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"></path></svg>
+            Excluir
+          </button>
+          <button disabled="{{ true }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text-faint);font-size:13.5px;font-weight:600;font-family:inherit;white-space:nowrap;opacity:0.55">Desabilitada</button>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button style="height:30px;padding:0 12px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap">sm · 30px</button>
+          <button style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">md · 38px</button>
+          <button style="height:44px;padding:0 18px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">lg · 44px</button>
+        </div>
+        <p style="margin:16px 0 0;font-size:12px;color:var(--text-muted);text-wrap:pretty">Destrutiva é <strong style="color:var(--text);font-weight:600">fill vermelho</strong>, nunca outline. Um primário âmbar por viewport. Desabilitada sempre acompanhada do motivo.</p>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Modais e ordem dos botões</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+        <div class="rb-card" style="padding:20px">
+          <div style="font-size:14px;font-weight:600;margin-bottom:6px">Lightbox de detalhe</div>
+          <p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;color:var(--text-muted);text-wrap:pretty">Clique na linha abre em leitura. Rodapé: <code style="color:var(--text)">[Excluir] … [Fechar] [Clonar] [Editar]</code>.</p>
+          <button onclick="{{ openDetail }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Abrir detalhe</button>
+        </div>
+        <div class="rb-card" style="padding:20px">
+          <div style="font-size:14px;font-weight:600;margin-bottom:6px">Confirmação destrutiva</div>
+          <p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;color:var(--text-muted);text-wrap:pretty">Ordem <strong style="color:var(--text);font-weight:600">invertida</strong>: destrutiva à esquerda, <code style="color:var(--text)">Cancelar</code> à direita e com o foco.</p>
+          <button onclick="{{ openConfirm }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Abrir confirmação</button>
+        </div>
+        <div class="rb-card" style="padding:20px">
+          <div style="font-size:14px;font-weight:600;margin-bottom:6px">Escopo de série</div>
+          <p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;color:var(--text-muted);text-wrap:pretty">Quando excluir tem variantes, o botão <strong style="color:var(--text);font-weight:600">não executa</strong>: abre os escopos.</p>
+          <button onclick="{{ openSeries }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Abrir com escopo</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Toast</div>
+      <div class="rb-card" style="padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px">
+        <div>
+          <p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;color:var(--text-muted);text-wrap:pretty">Canto inferior direito, empilhando para cima, no máximo 3. Fundo sempre <code style="color:var(--text)">--surface</code>; a semântica entra no chip do ícone. Hover pausa o cronômetro.</p>
+          <div style="display:flex;gap:9px;flex-wrap:wrap">
+            <sc-for list="{{ toastDemos }}" as="td" hint-placeholder-count="4">
+              <button onclick="{{ td.onClick }}" style="height:34px;padding:0 13px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">{{ td.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ toastSpec }}" as="ts" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:7px 0;border-top:1px solid {{ ts.divider }}">
+                <span style="font-size:12.5px;color:var(--text)">{{ ts.k }}</span>
+                <span style="font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap">{{ ts.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Badges de status</div>
+      <div class="rb-card" style="padding:20px">
+        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px">
+          <sc-for list="{{ badges }}" as="bg" hint-placeholder-count="5">
+            <span style="font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:var(--rb-radius-pill);background:{{ bg.bg }};color:{{ bg.color }};white-space:nowrap">{{ bg.label }}</span>
+          </sc-for>
+        </div>
+        <p style="margin:0;font-size:12px;color:var(--text-muted);text-wrap:pretty">Verde só para estado terminal confirmado. Previsto e agendado são neutros. O texto do badge é sempre mais claro (dark) ou mais escuro (light) que a matiz do próprio tint.</p>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Controles</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px">
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Busca global</div>
+          <div style="position:relative;display:flex;align-items:center">
+            <span style="position:absolute;left:20px;display:flex;color:var(--text-muted)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            </span>
+            <input placeholder="Buscar lançamentos, pessoas, valores…" style="width:100%;height:var(--rb-search-h);border-radius:var(--rb-radius-pill);border:1px solid var(--border);background:var(--search-bg);color:var(--text);padding:0 22px 0 54px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box" style-focus="border-color:var(--accent);box-shadow:0 0 0 4px rgba(232,160,32,0.15);background:var(--surface)" />
+          </div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted)">50px, pílula, 15px. Atalho <code style="color:var(--text)">/</code> foca o campo.</p>
+        </div>
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Seletor de entidade</div>
+          <div style="height:42px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;gap:10px;padding:0 12px">
+            <span style="width:22px;height:22px;border-radius:var(--rb-radius-sm);background:#FFFFFF;box-shadow:0 0 0 1px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#0B0D10">C</span>
+            <span style="flex:1;font-size:13.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Cora Checking BRL</span>
+            <span style="font-size:11px;font-weight:600;color:var(--text-faint)">BRL</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"></path></svg>
+          </div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted);text-wrap:pretty">Marca da entidade em quadrado branco nos dois temas — logo de terceiro não se adapta a tema.</p>
+        </div>
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Período e segmented</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <div style="display:flex;border:1px solid var(--border);border-radius:var(--rb-radius-md);padding:3px;background:var(--bg)">
+              <sc-for list="{{ segments }}" as="sg" hint-placeholder-count="2">
+                <button onclick="{{ sg.onClick }}" style="height:30px;padding:0 15px;border-radius:6px;border:none;font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;background:{{ sg.bg }};color:{{ sg.color }};white-space:nowrap">{{ sg.label }}</button>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;border:1px solid var(--border);border-radius:var(--rb-radius-md);overflow:hidden;background:var(--bg)">
+              <button onclick="{{ prevPeriod }}" aria-label="Anterior" style="width:34px;height:38px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"></path></svg>
+              </button>
+              <span style="min-width:{{ periodWidth }};text-align:center;font-size:13px;font-weight:600">{{ periodLabel }}</span>
+              <button onclick="{{ nextPeriod }}" aria-label="Próximo" style="width:34px;height:38px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg>
+              </button>
+            </div>
+          </div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted)">Mês e ano sempre juntos; largura fixa no rótulo.</p>
+        </div>
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Chips de filtro</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="4">
+              <button onclick="{{ ch.onClick }}" style="height:34px;padding:0 14px;border-radius:var(--rb-radius-pill);border:1px solid {{ ch.border }};background:{{ ch.bg }};color:{{ ch.color }};font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap;opacity:{{ ch.opacity }}">{{ ch.label }}</button>
+            </sc-for>
+          </div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted)">Seleção é borda âmbar — nunca fundo âmbar preenchido.</p>
+        </div>
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Campo de formulário</div>
+          <label for="cnpj" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">CNPJ</label>
+          <input id="cnpj" placeholder="XX.XXX.XXX/XXXX-XX" style="width:100%;height:44px;border-radius:var(--rb-radius-md);border:1px solid var(--err-text);background:var(--surface);color:var(--text);padding:0 14px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box" />
+          <div style="font-size:11.5px;color:var(--err-text);margin-top:6px">Informe um CNPJ com 14 dígitos.</div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted);text-wrap:pretty">Rótulo acima, placeholder só como exemplo de formato, validação no blur e mensagem que diz como corrigir.</p>
+        </div>
+
+        <div class="rb-card" style="padding:18px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:11px">Item de menu</div>
+          <div style="background:var(--chrome);border-radius:var(--rb-radius-md);padding:10px;display:flex;flex-direction:column;gap:2px">
+            <sc-for list="{{ navDemo }}" as="nd" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--rb-radius-md);position:relative;background:{{ nd.rowBg }}">
+                <div style="position:absolute;left:-10px;top:6px;bottom:6px;width:3px;border-radius:2px;background:{{ nd.bar }}"></div>
+                <span style="width:18px;height:18px;flex-shrink:0;color:{{ nd.iconColor }}" dangerouslySetInnerHTML="{{ nd.icon }}"></span>
+                <span style="font-size:13.5px;font-weight:{{ nd.weight }};color:{{ nd.color }};white-space:nowrap">{{ nd.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted)">Ativo = ícone âmbar + peso 600 + barra de 3px.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Tabela · densidade comfortable</div>
+      <div class="rb-card" style="overflow:hidden">
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;table-layout:fixed;min-width:540px">
+            <colgroup><col style="width:13%"><col style="width:34%"><col style="width:20%"><col style="width:17%"><col style="width:16%"></colgroup>
+            <thead>
+              <tr style="background:var(--surface-raised)">
+                <th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-faint);white-space:nowrap">Data</th>
+                <th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-faint);white-space:nowrap">Descrição</th>
+                <th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-faint);white-space:nowrap">Conta</th>
+                <th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-faint);white-space:nowrap">Status</th>
+                <th style="text-align:right;padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-faint);white-space:nowrap">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="4">
+                <tr onclick="{{ openDetail }}" style="border-top:1px solid var(--border);cursor:pointer" style-hover="background:var(--row-hover)">
+                  <td style="padding:12px 16px;font-size:13px;color:var(--text-muted);white-space:nowrap">{{ r.date }}</td>
+                  <td style="padding:12px 16px;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.desc }}</td>
+                  <td style="padding:12px 16px;font-size:13px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.account }}</td>
+                  <td style="padding:12px 16px"><span style="font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:var(--rb-radius-pill);background:{{ r.statusBg }};color:{{ r.statusColor }};white-space:nowrap">{{ r.status }}</span></td>
+                  <td style="padding:12px 16px;text-align:right;font-size:13.5px;font-weight:600;color:{{ r.valueColor }};white-space:nowrap">{{ r.value }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-top:1px solid var(--border)">
+          <span style="font-size:12.5px;color:var(--text-faint)">Mostrando 4 de 1.249</span>
+          <div style="display:flex;gap:6px">
+            <button style="height:30px;padding:0 12px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:12.5px;font-family:inherit;cursor:pointer;white-space:nowrap">Anterior</button>
+            <button style="height:30px;padding:0 12px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:12.5px;font-family:inherit;cursor:pointer;white-space:nowrap">Próxima</button>
+          </div>
+        </div>
+      </div>
+      <p style="margin:11px 0 0;font-size:12px;color:var(--text-muted);text-wrap:pretty">Linha de 44px, borda em vez de zebra, larguras fixas com ellipsis. Clique na linha abre o detalhe — experimente.</p>
+    </div>
+
+    <div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px">Os quatro estados</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px">
+
+        <div class="rb-card" style="padding:26px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px">
+          <span style="width:44px;height:44px;border-radius:var(--rb-radius-md);background:var(--surface-raised);display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v18H3z"></path><path d="M3 9h18M9 21V9"></path></svg>
+          </span>
+          <div style="font-size:14px;font-weight:600">Nenhum lançamento neste mês</div>
+          <div style="font-size:12.5px;color:var(--text-muted);text-wrap:pretty">Importe um extrato para começar a conciliar.</div>
+          <button style="margin-top:4px;height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:none;background:var(--accent);color:var(--accent-on);font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap">Importar extrato</button>
+        </div>
+
+        <div class="rb-card" style="padding:20px;display:flex;flex-direction:column;gap:11px">
+          <div style="height:11px;width:38%;border-radius:4px;background:var(--surface-raised)"></div>
+          <sc-for list="{{ skeleton }}" as="sk" hint-placeholder-count="4">
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="height:13px;flex:1;border-radius:4px;background:var(--surface-raised)"></div>
+              <div style="height:13px;width:58px;border-radius:4px;background:var(--surface-raised)"></div>
+            </div>
+          </sc-for>
+          <div style="font-size:11.5px;color:var(--text-faint);margin-top:2px">Skeleton com as alturas reais — nunca spinner.</div>
+        </div>
+
+        <div class="rb-card" style="padding:20px;display:flex;flex-direction:column;gap:11px">
+          <div style="display:flex;gap:11px;align-items:flex-start">
+            <span style="width:24px;height:24px;flex-shrink:0;border-radius:var(--rb-radius-sm);background:var(--err-bg);color:var(--err-text);display:flex;align-items:center;justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+            </span>
+            <div>
+              <div style="font-size:13px;font-weight:600">Não foi possível carregar os lançamentos</div>
+              <div style="font-size:12.5px;color:var(--text);margin-top:3px;text-wrap:pretty">A API do banco não respondeu às 04:12. Os dados exibidos podem estar desatualizados.</div>
+            </div>
+          </div>
+          <button style="align-self:flex-start;height:34px;padding:0 14px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Tentar novamente</button>
+        </div>
+
+        <div class="rb-card" style="padding:20px;display:flex;gap:11px;align-items:flex-start">
+          <span style="width:24px;height:24px;flex-shrink:0;border-radius:var(--rb-radius-sm);background:var(--neutral-bg);color:var(--neutral-text);display:flex;align-items:center;justify-content:center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+          </span>
+          <div>
+            <div style="font-size:13px;font-weight:600">Sem acesso a esta tela</div>
+            <div style="font-size:12.5px;color:var(--text);margin-top:3px;text-wrap:pretty">Requer o perfil Financeiro. Solicite a um administrador da organização.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <span style="font-size:12px;color:var(--text-faint)">RumBee · sistema de design v1.0 · uso interno</span>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="marca.dc.html" style="font-size:12.5px;font-weight:600;color:var(--accent-ink)">Manual público da marca</a>
+        <a href="DESIGN.md" style="font-size:12.5px;font-weight:600;color:var(--accent-ink)">DESIGN.md</a>
+        <a href="INTERACTIONS.md" style="font-size:12.5px;font-weight:600;color:var(--accent-ink)">INTERACTIONS.md</a>
+      </div>
+    </div>
+
+  </div>
+
+  <sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
+    <div onclick="{{ closeModal }}" style="position:fixed;inset:0;background:var(--overlay);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:28px;z-index:60">
+      <div style="width:100%;max-width:780px;max-height:86vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--rb-radius-xl);box-shadow:var(--shadow-lg)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:19px 22px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface)">
+          <div style="display:flex;align-items:center;gap:11px;min-width:0">
+            <span style="width:34px;height:34px;flex-shrink:0;border-radius:9px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path></svg>
+            </span>
+            <div style="min-width:0">
+              <h3 style="margin:0;font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Conta a receber · GERAÇÃO SOCIAL CONSULTORIA LTDA <span style="font-weight:400;color:var(--text-faint)">#230554</span></h3>
+              <div style="font-size:12.5px;color:var(--text-muted);margin-top:2px">Registro de AR/AP · Cora Checking BRL</div>
+            </div>
+            <span style="flex-shrink:0;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:var(--rb-radius-pill);background:var(--ok-bg);color:var(--ok-text);white-space:nowrap">Baixado</span>
+          </div>
+          <button onclick="{{ closeModal }}" aria-label="Fechar" style="width:32px;height:32px;flex-shrink:0;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <div style="padding:20px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px">
+          <sc-for list="{{ detailFields }}" as="fd" hint-placeholder-count="8">
+            <div>
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px">{{ fd.label }}</div>
+              <div style="font-size:13.5px;font-weight:500">{{ fd.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="padding:0 22px 18px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:9px">Lançamentos conciliados (1)</div>
+          <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:var(--rb-radius-md);padding:11px 13px">
+            <span style="font-size:12.5px;color:var(--text-muted);white-space:nowrap">31/08/2026</span>
+            <span style="flex:1;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">INCOMING BOLETO_COBRANCA — GERAÇÃO SOCIAL</span>
+            <span style="font-size:12.5px;color:var(--text-muted);white-space:nowrap">Inter BRL</span>
+            <span style="font-size:13px;font-weight:600;white-space:nowrap">R$ 350,00</span>
+            <button aria-label="Desvincular" style="width:26px;height:26px;flex-shrink:0;border-radius:6px;border:none;background:transparent;color:var(--info-text);cursor:pointer;display:flex;align-items:center;justify-content:center">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 1 1 0 10h-2"></path><path d="M4 4l16 16"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 22px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface)">
+          <button onclick="{{ openConfirm }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:none;background:var(--err-fill);color:var(--err-on-fill);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"></path></svg>
+            Excluir
+          </button>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button onclick="{{ closeModal }}" style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:none;background:transparent;color:var(--text-muted);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Fechar</button>
+            <button style="height:38px;padding:0 16px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+              Clonar
+            </button>
+            <button style="height:38px;padding:0 18px;border-radius:var(--rb-radius-md);border:none;background:var(--accent);color:var(--accent-on);font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+              Editar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ confirmOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:var(--overlay);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:28px;z-index:70">
+      <div style="width:100%;max-width:{{ confirmWidth }};background:var(--surface);border:1px solid var(--border);border-radius:var(--rb-radius-xl);box-shadow:var(--shadow-lg)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:19px 22px;border-bottom:1px solid var(--border)">
+          <h3 style="margin:0;font-size:16px;font-weight:700">{{ confirmTitle }} <span style="font-weight:400;color:var(--text-faint)">#230554</span></h3>
+          <button onclick="{{ closeModal }}" aria-label="Fechar" style="width:30px;height:30px;flex-shrink:0;border-radius:var(--rb-radius-md);border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <div style="padding:20px 22px;display:flex;flex-direction:column;gap:13px">
+          <div style="font-size:14px;font-weight:400">Excluir <strong style="font-weight:700">"GERAÇÃO SOCIAL CONSULTORIA LTDA (500089)"</strong>?</div>
+          <div style="font-size:13px;line-height:1.55;color:var(--text)">Há 1 lançamento de extrato conciliado com este AR/AP — ele será desvinculado (o extrato em si não é apagado).</div>
+          <sc-if value="{{ isSeries }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;line-height:1.55;color:var(--text)">Faz parte de uma série (Mensal). "Esta e as futuras" apaga desta data em diante; ocorrências anteriores ficam. "Toda a série" apaga tudo.</div>
+          </sc-if>
+          <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:13px;line-height:1.55;color:var(--text)">Esta ação não pode ser desfeita.</div>
+          </sc-if>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 22px;border-top:1px solid var(--border);position:relative">
+          <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+            <button onclick="{{ doDelete }}" style="height:40px;padding:0 18px;border-radius:var(--rb-radius-md);border:none;background:var(--err-fill);color:var(--err-on-fill);font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap">Excluir lançamento</button>
+          </sc-if>
+          <sc-if value="{{ isSeries }}" hint-placeholder-val="{{ false }}">
+            <div style="position:relative;display:flex">
+              <button onclick="{{ toggleScope }}" style="height:40px;padding:0 16px;border-radius:var(--rb-radius-md) 0 0 var(--rb-radius-md);border:none;background:{{ scopeFill }};color:#FFFFFF;font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap">Escolha o que excluir</button>
+              <button onclick="{{ toggleScope }}" aria-label="Opções de escopo" style="width:40px;height:40px;border-radius:0 var(--rb-radius-md) var(--rb-radius-md) 0;border:none;border-left:1px solid rgba(255,255,255,0.22);background:var(--err-fill);color:var(--err-on-fill);cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ scopeOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;bottom:48px;left:0;min-width:220px;background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--rb-radius-md);box-shadow:var(--shadow-lg);padding:6px;display:flex;flex-direction:column;gap:1px;z-index:10">
+                  <sc-for list="{{ scopes }}" as="sc" hint-placeholder-count="3">
+                    <div onclick="{{ sc.onClick }}" style="padding:10px 12px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text);white-space:nowrap" style-hover="background:var(--row-hover)">{{ sc.label }}</div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+          <button onclick="{{ closeModal }}" style="height:40px;padding:0 20px;border-radius:var(--rb-radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:fixed;right:24px;bottom:24px;z-index:80;display:flex;flex-direction:column-reverse;gap:10px;align-items:flex-end">
+    <sc-for list="{{ toasts }}" as="to" hint-placeholder-count="0">
+      <div style="min-width:300px;max-width:420px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rb-radius-lg);box-shadow:var(--shadow-lg);padding:13px 14px;display:flex;gap:11px;align-items:flex-start">
+        <span style="width:24px;height:24px;flex-shrink:0;border-radius:var(--rb-radius-sm);background:{{ to.chipBg }};color:{{ to.chipColor }};display:flex;align-items:center;justify-content:center" dangerouslySetInnerHTML="{{ to.icon }}"></span>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600">{{ to.title }}</div>
+          <div style="font-size:12px;color:var(--text);margin-top:2px;text-wrap:pretty">{{ to.body }}</div>
+          <sc-if value="{{ to.hasUndo }}" hint-placeholder-val="{{ false }}">
+            <button onclick="{{ to.onUndo }}" style="margin-top:8px;padding:0;border:none;background:transparent;color:var(--accent-ink);font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer">Desfazer</button>
+          </sc-if>
+        </div>
+        <button onclick="{{ to.onClose }}" aria-label="Fechar aviso" style="width:20px;height:20px;flex-shrink:0;border:none;background:transparent;color:var(--text-faint);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1120,&quot;height&quot;:880}}">
+const SUN = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>';
+const MOON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+const NAV_ICONS = [
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"></path><path d="M3 9h18M9 21V9"></path></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>'
+];
+
+const T_ICONS = {
+  ok: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>',
+  warn: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>',
+  err: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>',
+  info: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>'
+};
+
+const DURATIONS = { ok: 5000, info: 5000, warn: 6000, err: 8000, undo: 8000 };
+
+class Component extends DCLogic {
+  state = {
+    theme: 'dark', toasts: [], modal: null, scopeOpen: false,
+    segment: 'Mês', monthIndex: 8, year: 2026, chips: { cora: true }
+  };
+  seq = 0;
+  timers = {};
+
+  componentDidMount() {
+    // O script inline do <helmet> já resolveu e aplicou data-theme antes da primeira
+    // pintura (META.md §6). Aqui só sincronizamos o state com o atributo presente.
+    const applied = document.documentElement.getAttribute('data-theme');
+    if (applied === 'light' || applied === 'dark') this.setState({ theme: applied });
+    this.onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      if (this.state.scopeOpen) this.setState({ scopeOpen: false });
+      else if (this.state.modal) this.setState({ modal: null });
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKey);
+    Object.keys(this.timers).forEach((k) => clearTimeout(this.timers[k]));
+  }
+
+  applyTheme(next) {
+    const root = document.documentElement;
+    if (root) root.setAttribute('data-theme', next);
+  }
+
+  toggleTheme = () => {
+    const next = this.state.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('rumbee-fin-theme', next);
+    this.applyTheme(next);
+    this.setState({ theme: next });
+  };
+
+  dismiss = (id) => {
+    if (this.timers[id]) { clearTimeout(this.timers[id]); delete this.timers[id]; }
+    this.setState((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) }));
+  };
+
+  push = (kind, title, body, undo) => {
+    const id = ++this.seq;
+    const ms = undo ? DURATIONS.undo : DURATIONS[kind];
+    this.setState((s) => {
+      const next = s.toasts.concat([{ id: id, kind: kind, title: title, body: body, undo: !!undo }]);
+      return { toasts: next.slice(-3) };
+    });
+    this.timers[id] = setTimeout(() => this.dismiss(id), ms);
+  };
+
+  render_toasts(t) {
+    const map = {
+      ok: { bg: 'var(--ok-bg)', color: 'var(--ok-text)' },
+      warn: { bg: 'var(--warn-bg)', color: 'var(--warn-text)' },
+      err: { bg: 'var(--err-bg)', color: 'var(--err-text)' },
+      info: { bg: 'var(--info-bg)', color: 'var(--info-text)' }
+    };
+    return this.state.toasts.map((to) => {
+      const c = map[to.kind] || map.info;
+      return {
+        title: to.title, body: to.body,
+        chipBg: c.bg, chipColor: c.color,
+        icon: { __html: T_ICONS[to.kind] || T_ICONS.info },
+        hasUndo: to.undo, notUndo: !to.undo,
+        onUndo: () => { this.dismiss(to.id); this.push('info', 'Ação desfeita', 'O lançamento voltou para "Pendente".'); },
+        onClose: () => this.dismiss(to.id)
+      };
+    });
+  }
+
+  renderVals() {
+    const isDark = this.state.theme === 'dark';
+    const modal = this.state.modal;
+    const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    const isYear = this.state.segment === 'Ano';
+    const chipDefs = [
+      { key: 'cora', label: 'Cora BRL' },
+      { key: 'inter', label: 'Inter BRL' },
+      { key: 'mercury', label: 'Mercury USD' },
+      { key: 'cs', label: 'Conta Simples' }
+    ];
+    const navLabels = ['Dashboard', 'Extratos', 'Conciliação'];
+
+    return {
+      themeIcon: { __html: isDark ? SUN : MOON },
+      themeLabel: isDark ? 'Tema claro' : 'Tema escuro',
+      toggleTheme: this.toggleTheme,
+
+      openDetail: () => this.setState({ modal: 'detail', scopeOpen: false }),
+      openConfirm: () => this.setState({ modal: 'confirm', scopeOpen: false }),
+      openSeries: () => this.setState({ modal: 'series', scopeOpen: false }),
+      closeModal: () => this.setState({ modal: null, scopeOpen: false }),
+      detailOpen: modal === 'detail',
+      confirmOpen: modal === 'confirm' || modal === 'series',
+      isSeries: modal === 'series',
+      isSingle: modal === 'confirm',
+      confirmTitle: modal === 'series' ? 'Excluir lançamento recorrente' : 'Excluir lançamento',
+      confirmWidth: modal === 'series' ? '560px' : '460px',
+      scopeOpen: this.state.scopeOpen,
+      scopeFill: this.state.scopeOpen ? '#8E1E17' : 'var(--err-fill)',
+      toggleScope: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState((s) => ({ scopeOpen: !s.scopeOpen })); },
+      scopes: [
+        { label: 'Só esta ocorrência', n: 1 },
+        { label: 'Esta e as futuras', n: 4 },
+        { label: 'Toda a série', n: 12 }
+      ].map((sc) => ({
+        label: sc.label,
+        onClick: () => {
+          this.setState({ modal: null, scopeOpen: false });
+          this.push('ok', sc.n + (sc.n === 1 ? ' lançamento excluído' : ' lançamentos excluídos'), 'Escopo: ' + sc.label.toLowerCase() + '. 1 vínculo de extrato foi desfeito.', true);
+        }
+      })),
+      doDelete: () => { this.setState({ modal: null }); this.push('ok', '1 lançamento excluído', 'O vínculo com o extrato foi desfeito.', true); },
+
+      toasts: this.render_toasts(),
+      toastDemos: [
+        { label: 'Sucesso', onClick: () => this.push('ok', '8 lançamentos conciliados', 'Setembro 2026 está 100% conciliado.') },
+        { label: 'Com desfazer', onClick: () => this.push('ok', '1 lançamento arquivado', 'Você pode reverter esta ação.', true) },
+        { label: 'Aviso', onClick: () => this.push('warn', '3 divergências encontradas', 'A cobrança do Chargebee não bate com o apurado.') },
+        { label: 'Erro', onClick: () => this.push('err', 'Não foi possível importar o extrato', 'A API da Cora retornou 503. Tente novamente em alguns minutos.') }
+      ],
+      toastSpec: [
+        { k: 'Posição', v: 'inferior direito', divider: 'transparent' },
+        { k: 'Sucesso / info', v: '5s', divider: 'var(--border)' },
+        { k: 'Aviso', v: '6s', divider: 'var(--border)' },
+        { k: 'Erro e com Desfazer', v: '8s', divider: 'var(--border)' },
+        { k: 'Máximo empilhado', v: '3', divider: 'var(--border)' },
+        { k: 'Hover', v: 'pausa o cronômetro', divider: 'var(--border)' }
+      ],
+
+      badges: [
+        { label: 'Conciliado', bg: 'var(--ok-bg)', color: 'var(--ok-text)' },
+        { label: 'Ação manual', bg: 'var(--warn-bg)', color: 'var(--warn-text)' },
+        { label: 'Vencido', bg: 'var(--err-bg)', color: 'var(--err-text)' },
+        { label: 'Regra aplicada', bg: 'var(--info-bg)', color: 'var(--info-text)' },
+        { label: 'Previsto', bg: 'var(--neutral-bg)', color: 'var(--neutral-text)' }
+      ],
+
+      segments: ['Mês', 'Ano'].map((label) => ({
+        label: label,
+        onClick: () => this.setState({ segment: label }),
+        bg: this.state.segment === label ? 'var(--surface)' : 'transparent',
+        color: this.state.segment === label ? 'var(--text)' : 'var(--text-muted)'
+      })),
+      periodLabel: isYear ? String(this.state.year) : months[this.state.monthIndex] + ' ' + this.state.year,
+      periodWidth: isYear ? '72px' : '150px',
+      prevPeriod: () => this.setState((s) => (isYear ? { year: s.year - 1 } : (s.monthIndex === 0 ? { monthIndex: 11, year: s.year - 1 } : { monthIndex: s.monthIndex - 1 }))),
+      nextPeriod: () => this.setState((s) => (isYear ? { year: s.year + 1 } : (s.monthIndex === 11 ? { monthIndex: 0, year: s.year + 1 } : { monthIndex: s.monthIndex + 1 }))),
+
+      chips: chipDefs.map((c) => {
+        const on = !!this.state.chips[c.key];
+        return {
+          label: c.label,
+          onClick: () => this.setState((s) => {
+            const next = Object.assign({}, s.chips);
+            if (next[c.key]) delete next[c.key]; else next[c.key] = true;
+            return { chips: next };
+          }),
+          border: on ? 'var(--accent)' : 'var(--border)',
+          bg: on ? 'var(--bg)' : 'transparent',
+          color: on ? 'var(--text)' : 'var(--text-muted)',
+          opacity: on ? 1 : 0.7
+        };
+      }),
+
+      navDemo: navLabels.map((label, i) => ({
+        label: label,
+        icon: { __html: NAV_ICONS[i] },
+        iconColor: i === 1 ? 'var(--accent)' : '#8A9099',
+        color: i === 1 ? '#ECE9E2' : '#8A9099',
+        weight: i === 1 ? 600 : 400,
+        bar: i === 1 ? 'var(--accent)' : 'transparent',
+        rowBg: i === 1 ? '#171B21' : 'transparent'
+      })),
+
+      skeleton: [1, 2, 3, 4].map((n) => ({ n: n })),
+
+      rows: [
+        { date: '15/09', desc: 'TED RECEBIDA CHARGEBEE INC', account: 'Cora BRL', status: 'Conciliado', statusBg: 'var(--ok-bg)', statusColor: 'var(--ok-text)', value: 'R$ 18.240,00', valueColor: 'var(--positive)' },
+        { date: '15/09', desc: 'WIRE TRANSFER PAYROLL INTL', account: 'Mercury USD', status: 'Pendente', statusBg: 'var(--neutral-bg)', statusColor: 'var(--neutral-text)', value: '−US$ 12.400,00', valueColor: 'var(--negative)' },
+        { date: '14/09', desc: 'PIX ENVIADO AMAZON WEB SERVICES', account: 'Inter BRL', status: 'Conciliado', statusBg: 'var(--ok-bg)', statusColor: 'var(--ok-text)', value: '−R$ 3.980,50', valueColor: 'var(--negative)' },
+        { date: '12/09', desc: 'CÂMBIO USD/BRL SPOT', account: 'Revolut', status: 'Erro', statusBg: 'var(--err-bg)', statusColor: 'var(--err-text)', value: '−US$ 5.000,00', valueColor: 'var(--negative)' }
+      ],
+
+      detailFields: [
+        { label: 'Status', value: 'Baixado' },
+        { label: 'Vencimento original', value: '28/08/2026' },
+        { label: 'Data reprogramada', value: '31/08/2026 (rolado p/ D+1)' },
+        { label: 'Mês de competência', value: 'ago/2026' },
+        { label: 'Valor previsto', value: 'R$ 350,00' },
+        { label: 'Valor realizado', value: 'R$ 350,00' },
+        { label: 'Conta contábil', value: 'Subscriptions' },
+        { label: 'Centro de resultado', value: 'Produto — Reev' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

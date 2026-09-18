@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    body { margin: 0; }
+    .rb-sec { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--rb-graf-900);color:var(--rb-osso);font-family:var(--rb-font)">
+
+  <div style="position:sticky;top:0;z-index:20;background:rgba(11,13,16,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--rb-graf-700)">
+    <div class="rb-sec" style="height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <img src="assets/rumbee-logo-horizontal-light-text.png" alt="RumBee" style="height:17px;width:auto;object-fit:contain" />
+      <div style="display:flex;align-items:center;gap:20px">
+        <sc-for list="{{ menu }}" as="mi" hint-placeholder-count="4">
+          <a href="{{ mi.href }}" style="font-size:12.5px;font-weight:500;color:var(--rb-graf-400);text-decoration:none;white-space:nowrap" style-hover="color:var(--rb-osso)">{{ mi.label }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;overflow:hidden;border-bottom:1px solid var(--rb-graf-700)">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 15% 25%, rgba(232,160,32,0.11), transparent 45%), radial-gradient(circle at 85% 70%, rgba(232,160,32,0.07), transparent 48%);pointer-events:none"></div>
+    <div class="rb-sec" style="position:relative;padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:48px;align-items:center">
+      <div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--rb-amber-500);margin-bottom:16px">Manual da marca</div>
+        <h1 style="font-size:48px;font-weight:700;line-height:1.08;margin:0 0 18px;letter-spacing:-0.01em">A linha reta até o fechamento.</h1>
+        <p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:var(--rb-graf-400);max-width:520px;text-wrap:pretty">A abelha não vagueia: volta da flor em linha reta para a colmeia. RumBee é rumo mais bee — e é disso que sai tudo que a marca faz. Esta página reúne os logos, as cores e as regras de uso.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#downloads" style="height:46px;padding:0 22px;border-radius:var(--rb-radius-md);background:var(--rb-amber-500);color:var(--rb-amber-on);font-size:14px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:9px;white-space:nowrap;box-shadow:0 2px 20px rgba(232,160,32,0.3)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+            Baixar os assets
+          </a>
+          <a href="#uso" style="height:46px;padding:0 22px;border-radius:var(--rb-radius-md);border:1px solid var(--rb-graf-700);color:var(--rb-osso);font-size:14px;font-weight:600;text-decoration:none;display:flex;align-items:center;white-space:nowrap" style-hover="border-color:var(--rb-graf-400)">Regras de uso</a>
+        </div>
+      </div>
+      <img src="assets/rumbee-beeline-target.png" alt="Beeline RumBee chegando ao alvo" style="width:100%;height:auto;display:block" />
+    </div>
+  </div>
+
+  <div id="simbolo" class="rb-sec" style="padding-top:64px;padding-bottom:64px">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:6px">01 · Símbolo</div>
+    <h2 style="font-size:28px;font-weight:700;margin:0 0 10px">Uma marca, dois lockups</h2>
+    <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:var(--rb-graf-400);max-width:640px;text-wrap:pretty">O hexágono é a célula da colmeia; a linha que o atravessa é a beeline. O logo horizontal já contém o símbolo — por isso ícone e logo nunca aparecem lado a lado.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+      <sc-for list="{{ lockups }}" as="lk" hint-placeholder-count="4">
+        <div style="border:1px solid var(--rb-graf-700);border-radius:var(--rb-radius-lg);overflow:hidden;background:var(--rb-graf-800)">
+          <div style="height:132px;background:{{ lk.plate }};display:flex;align-items:center;justify-content:center;padding:24px">
+            <img src="{{ lk.src }}" alt="{{ lk.label }}" style="max-height:{{ lk.h }};max-width:100%;width:auto;object-fit:contain" />
+          </div>
+          <div style="padding:15px 17px;border-top:1px solid var(--rb-graf-700)">
+            <div style="font-size:13.5px;font-weight:600">{{ lk.label }}</div>
+            <div style="font-size:12px;color:var(--rb-graf-400);margin-top:3px;text-wrap:pretty">{{ lk.use }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="cor" style="border-top:1px solid var(--rb-graf-700);border-bottom:1px solid var(--rb-graf-700);background:var(--rb-graf-950)">
+    <div class="rb-sec" style="padding-top:64px;padding-bottom:64px">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:6px">02 · Cor</div>
+      <h2 style="font-size:28px;font-weight:700;margin:0 0 10px">Grafite carrega, âmbar decide</h2>
+      <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:var(--rb-graf-400);max-width:640px;text-wrap:pretty">Duas cores de marca, e a proporção entre elas é parte da identidade: o grafite ocupa a tela, o âmbar aparece só no ponto de decisão — no máximo 8% da área.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px;margin-bottom:34px">
+        <sc-for list="{{ brandColors }}" as="bc" hint-placeholder-count="4">
+          <div style="border:1px solid var(--rb-graf-700);border-radius:var(--rb-radius-lg);overflow:hidden">
+            <div style="height:96px;background:{{ bc.hex }}"></div>
+            <div style="padding:13px 15px;background:var(--rb-graf-800)">
+              <div style="font-size:13.5px;font-weight:600">{{ bc.name }}</div>
+              <div style="font-size:12px;color:var(--rb-graf-400);margin-top:3px">{{ bc.hex }}</div>
+              <div style="font-size:11.5px;color:var(--rb-graf-300);margin-top:6px;text-wrap:pretty">{{ bc.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:12px">Escala completa</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ ramp }}" as="rp" hint-placeholder-count="16">
+          <div style="flex:1 1 92px;min-width:92px">
+            <div style="height:52px;border-radius:var(--rb-radius-sm);background:{{ rp.hex }};border:1px solid rgba(255,255,255,0.07)"></div>
+            <div style="font-size:10.5px;color:var(--rb-graf-300);margin-top:6px">{{ rp.name }}</div>
+            <div style="font-size:10.5px;color:var(--rb-graf-400)">{{ rp.hex }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div id="tipografia" class="rb-sec" style="padding-top:64px;padding-bottom:64px">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:6px">03 · Tipografia</div>
+    <h2 style="font-size:28px;font-weight:700;margin:0 0 10px">Archivo, e só Archivo</h2>
+    <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:var(--rb-graf-400);max-width:640px;text-wrap:pretty">Uma família, quatro pesos, hierarquia por tamanho. Archivo economiza largura em tabela densa sem apertar a leitura, e fecha títulos nos pesos 600 e 700 sem precisar de ajuste.</p>
+
+    <div style="border:1px solid var(--rb-graf-700);border-radius:var(--rb-radius-lg);background:var(--rb-graf-800);padding:6px 22px;margin-bottom:16px">
+      <sc-for list="{{ typeScale }}" as="ty" hint-placeholder-count="5">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:16px 0;border-top:1px solid {{ ty.divider }}">
+          <span style="font-size:{{ ty.size }};font-weight:{{ ty.weight }};min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ ty.sample }}</span>
+          <span style="font-size:11.5px;color:var(--rb-graf-300);white-space:nowrap;flex-shrink:0">{{ ty.spec }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:0;font-size:12.5px;color:var(--rb-graf-300)">Archivo é aberta, via Google Fonts. Em documento onde ela não esteja disponível, use Helvetica Neue ou Arial — nunca uma segunda família junto com Archivo.</p>
+  </div>
+
+  <div id="uso" style="border-top:1px solid var(--rb-graf-700);background:var(--rb-graf-950)">
+    <div class="rb-sec" style="padding-top:64px;padding-bottom:64px">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:6px">04 · Uso</div>
+      <h2 style="font-size:28px;font-weight:700;margin:0 0 28px">Como usar a marca</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+        <div style="border:1px solid rgba(16,185,129,0.3);border-radius:var(--rb-radius-lg);background:var(--rb-graf-800);padding:22px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+            <span style="width:24px;height:24px;border-radius:var(--rb-radius-sm);background:rgba(16,185,129,0.15);color:#34D399;display:flex;align-items:center;justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>
+            </span>
+            <span style="font-size:14px;font-weight:600">Pode</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ dos }}" as="d" hint-placeholder-count="5">
+              <div style="font-size:13px;line-height:1.55;color:var(--rb-osso);text-wrap:pretty">{{ d.text }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(220,38,38,0.3);border-radius:var(--rb-radius-lg);background:var(--rb-graf-800);padding:22px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+            <span style="width:24px;height:24px;border-radius:var(--rb-radius-sm);background:rgba(220,38,38,0.15);color:#F87171;display:flex;align-items:center;justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+            </span>
+            <span style="font-size:14px;font-weight:600">Não pode</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ donts }}" as="d" hint-placeholder-count="6">
+              <div style="font-size:13px;line-height:1.55;color:var(--rb-osso);text-wrap:pretty">{{ d.text }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="downloads" style="border-top:1px solid var(--rb-graf-700)">
+    <div class="rb-sec" style="padding-top:64px;padding-bottom:64px">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--rb-graf-300);margin-bottom:6px">05 · Downloads</div>
+      <h2 style="font-size:28px;font-weight:700;margin:0 0 10px">Arquivos oficiais</h2>
+      <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:var(--rb-graf-400);max-width:640px;text-wrap:pretty">PNG com fundo transparente, em alta resolução. Use sempre estes arquivos — não recorte de screenshot, não reconstrua o símbolo.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:14px">
+        <sc-for list="{{ downloads }}" as="dl" hint-placeholder-count="6">
+          <a href="{{ dl.src }}" download="{{ dl.file }}" style="display:flex;align-items:center;gap:14px;border:1px solid var(--rb-graf-700);border-radius:var(--rb-radius-lg);background:var(--rb-graf-800);padding:15px 17px;text-decoration:none;color:inherit" style-hover="border-color:var(--rb-amber-500)">
+            <span style="width:44px;height:44px;flex-shrink:0;border-radius:var(--rb-radius-sm);background:{{ dl.plate }};display:flex;align-items:center;justify-content:center;padding:7px;box-sizing:border-box">
+              <img src="{{ dl.src }}" alt="" style="max-width:100%;max-height:100%;object-fit:contain" />
+            </span>
+            <span style="flex:1;min-width:0">
+              <span style="display:block;font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ dl.label }}</span>
+              <span style="display:block;font-size:11.5px;color:var(--rb-graf-300);margin-top:2px;white-space:nowrap">{{ dl.meta }}</span>
+            </span>
+            <span style="flex-shrink:0;color:var(--rb-amber-500)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid var(--rb-graf-700);background:var(--rb-graf-950)">
+    <div class="rb-sec" style="padding-top:40px;padding-bottom:48px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div>
+        <img src="assets/rumbee-logo-horizontal-light-text.png" alt="RumBee" style="height:15px;width:auto;object-fit:contain;display:block;margin-bottom:14px" />
+        <p style="margin:0;font-size:12.5px;color:var(--rb-graf-300);max-width:440px;text-wrap:pretty">Dúvida sobre uso da marca, parceria ou material de imprensa: <a href="mailto:marca@rumbee.ai" style="color:var(--rb-amber-500)">marca@rumbee.ai</a></p>
+      </div>
+      <div style="font-size:11.5px;color:var(--rb-graf-300);text-align:right">
+        <div>© 2026 RumBee · rumbee.ai</div>
+        <div style="margin-top:4px">Manual da marca v1.0</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      menu: [
+        { label: 'Símbolo', href: '#simbolo' },
+        { label: 'Cor', href: '#cor' },
+        { label: 'Tipografia', href: '#tipografia' },
+        { label: 'Uso', href: '#uso' },
+        { label: 'Downloads', href: '#downloads' }
+      ],
+      lockups: [
+        { label: 'Logo — texto claro', use: 'Sobre grafite e qualquer fundo escuro. É a versão padrão.', src: 'assets/rumbee-logo-horizontal-light-text.png', plate: '#0B0D10', h: '30px' },
+        { label: 'Logo — texto escuro', use: 'Sobre osso, branco e qualquer fundo claro.', src: 'assets/rumbee-logo-horizontal-dark-text.png', plate: '#F7F6F2', h: '30px' },
+        { label: 'Ícone isolado', use: 'Favicon, avatar, área reduzida. Funciona a partir de 20px.', src: 'assets/rumbee-icon-transparent.png', plate: '#171B21', h: '58px' },
+        { label: 'Beeline', use: 'Elemento gráfico de apoio — telas de marca e aberturas.', src: 'assets/rumbee-beeline-target.png', plate: '#0B0D10', h: '74px' }
+      ],
+      brandColors: [
+        { name: 'Grafite', hex: '#0E1013', role: 'A base. Ocupa a tela e carrega a informação.' },
+        { name: 'Âmbar', hex: '#E8A020', role: 'A ação. O mel, o alvo, o ponto de decisão.' },
+        { name: 'Osso', hex: '#ECE9E2', role: 'Texto sobre grafite.' },
+        { name: 'Paper', hex: '#F7F6F2', role: 'Fundo do modo claro.' }
+      ],
+      ramp: [
+        { name: 'amber 50', hex: '#FDF3E2' },
+        { name: 'amber 100', hex: '#FBE4B8' },
+        { name: 'amber 300', hex: '#F3C065' },
+        { name: 'amber 500', hex: '#E8A020' },
+        { name: 'amber 600', hex: '#C97D06' },
+        { name: 'amber 700', hex: '#9C6205' },
+        { name: 'graf 950', hex: '#0B0D10' },
+        { name: 'graf 900', hex: '#0E1013' },
+        { name: 'graf 800', hex: '#1B2028' },
+        { name: 'graf 700', hex: '#262B33' },
+        { name: 'graf 600', hex: '#333944' },
+        { name: 'graf 400', hex: '#8A9099' },
+        { name: 'graf 200', hex: '#B9BEC5' },
+        { name: 'paper 200', hex: '#F3F1EB' },
+        { name: 'paper 400', hex: '#E4E1D8' },
+        { name: 'ink 900', hex: '#17181B' }
+      ],
+      typeScale: [
+        { sample: 'A linha reta até o fechamento', size: '40px', weight: 700, spec: '40 / 700 · display', divider: 'transparent' },
+        { sample: 'Título de página', size: '26px', weight: 700, spec: '26 / 700 · h1', divider: 'var(--rb-graf-700)' },
+        { sample: 'Título de seção', size: '20px', weight: 700, spec: '20 / 700 · h2', divider: 'var(--rb-graf-700)' },
+        { sample: 'Título de card e modal', size: '16px', weight: 600, spec: '16 / 600 · h3', divider: 'var(--rb-graf-700)' },
+        { sample: 'Texto corrido de interface, 13,5px, é o corpo padrão do sistema.', size: '13.5px', weight: 400, spec: '13,5 / 400 · corpo', divider: 'var(--rb-graf-700)' },
+        { sample: 'RÓTULO DE SEÇÃO', size: '11px', weight: 600, spec: '11 / 600 · 0,05em · overline', divider: 'var(--rb-graf-700)' }
+      ],
+      dos: [
+        { text: 'Usar os arquivos oficiais, sempre definindo a altura e deixando a largura automática.' },
+        { text: 'Manter margem de respiro de ao menos a altura do símbolo em toda a volta.' },
+        { text: 'Escolher o lockup pelo fundo: texto claro no escuro, texto escuro no claro.' },
+        { text: 'Usar o âmbar com escassez — no botão principal, no destaque pontual.' },
+        { text: 'Escrever RumBee com R e B maiúsculos; o produto é "RumBee <Produto>".' }
+      ],
+      donts: [
+        { text: 'Colocar o ícone ao lado do logo horizontal — o logo já contém o símbolo.' },
+        { text: 'Recolorir, aplicar sombra, contorno, gradiente ou rotação no logo.' },
+        { text: 'Esticar, comprimir ou redesenhar o símbolo.' },
+        { text: 'Usar o âmbar como fundo de página, de card grande ou de barra inteira.' },
+        { text: 'Pôr texto branco sobre o âmbar: o texto sobre âmbar é grafite escuro.' },
+        { text: 'Sobrepor o logo a foto de baixo contraste ou a padrão visualmente carregado.' }
+      ],
+      downloads: [
+        { label: 'Logo horizontal — texto claro', meta: 'PNG transparente · alta resolução', file: 'rumbee-logo-claro.png', src: 'assets/rumbee-logo-horizontal-light-text.png', plate: '#0B0D10' },
+        { label: 'Logo horizontal — texto escuro', meta: 'PNG transparente · alta resolução', file: 'rumbee-logo-escuro.png', src: 'assets/rumbee-logo-horizontal-dark-text.png', plate: '#F7F6F2' },
+        { label: 'Ícone RumBee', meta: 'PNG transparente · 1480×1480', file: 'rumbee-icone.png', src: 'assets/rumbee-icon-transparent.png', plate: '#171B21' },
+        { label: 'Favicon', meta: 'PNG · 512×512', file: 'rumbee-favicon-512.png', src: 'assets/favicon-512.png', plate: '#171B21' },
+        { label: 'Imagem de compartilhamento', meta: 'PNG · 1200×630 · Open Graph', file: 'rumbee-og-image.png', src: 'assets/og-image.png', plate: '#0B0D10' },
+        { label: 'Beeline', meta: 'PNG transparente · elemento gráfico', file: 'rumbee-beeline.png', src: 'assets/rumbee-beeline-target.png', plate: '#0B0D10' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

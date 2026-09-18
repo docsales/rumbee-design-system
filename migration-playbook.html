@@ -1,0 +1,262 @@
+<title>RumBee Migration Playbook</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface-2: #f1ede6;
+    --border: #e4ddd0;
+    --ink: #211c14;
+    --ink-soft: #6b6252;
+    --amber: #c96a1f;
+    --amber-ink: #ffffff;
+    --amber-soft: #fbe8d3;
+    --mono-bg: #211c14;
+    --mono-ink: #f3ead9;
+    --mono-border: #443b2a;
+    --shadow: 0 1px 2px rgba(33,28,20,0.04), 0 8px 24px rgba(33,28,20,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17140f;
+      --surface: #1f1b14;
+      --surface-2: #262019;
+      --border: #3a3122;
+      --ink: #f3ead9;
+      --ink-soft: #b8ac93;
+      --amber: #e8912f;
+      --amber-ink: #1a1408;
+      --amber-soft: #3a2b12;
+      --mono-bg: #0f0d09;
+      --mono-ink: #f3ead9;
+      --mono-border: #3a3122;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17140f;
+    --surface: #1f1b14;
+    --surface-2: #262019;
+    --border: #3a3122;
+    --ink: #f3ead9;
+    --ink-soft: #b8ac93;
+    --amber: #e8912f;
+    --amber-ink: #1a1408;
+    --amber-soft: #3a2b12;
+    --mono-bg: #0f0d09;
+    --mono-ink: #f3ead9;
+    --mono-border: #3a3122;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    padding: 0 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding-block: 48px 80px; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Archivo Narrow", sans-serif;
+    font-weight: 600; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--amber); background: var(--amber-soft);
+    padding: 5px 11px; border-radius: 999px;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--amber); }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 38px); font-weight: 800; letter-spacing: -0.02em;
+    margin: 18px 0 10px; text-wrap: balance; line-height: 1.1;
+  }
+  .lede { font-size: 16.5px; color: var(--ink-soft); line-height: 1.6; max-width: 62ch; margin: 0 0 36px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 24px; margin-bottom: 20px; box-shadow: var(--shadow);
+  }
+  .card h2 { font-size: 15px; font-weight: 700; margin: 0 0 10px; display: flex; align-items: center; gap: 9px; }
+  .card h2 .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 7px; background: var(--amber-soft); color: var(--amber);
+    font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 500; flex-shrink: 0;
+  }
+  .card p, .card li { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+  .card p { margin: 0 0 8px; }
+  .card ul { margin: 8px 0 0; padding-left: 20px; }
+  .card li { margin-bottom: 5px; }
+  .card strong { color: var(--ink); font-weight: 600; }
+  code {
+    font-family: "JetBrains Mono", monospace; font-size: 0.86em;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px;
+    padding: 1px 5px; color: var(--ink);
+  }
+
+  h2.section {
+    font-size: 20px; font-weight: 800; letter-spacing: -0.01em;
+    margin: 52px 0 6px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 20px; line-height: 1.55; max-width: 60ch; }
+
+  .badge {
+    display: inline-flex; font-family: "Archivo Narrow", sans-serif; font-weight: 600;
+    font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 6px;
+  }
+  .badge.a { background: var(--amber-soft); color: var(--amber); }
+  .badge.b { background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--border); }
+
+  .prompt-block {
+    position: relative;
+    background: var(--mono-bg); color: var(--mono-ink);
+    border: 1px solid var(--mono-border); border-radius: 14px;
+    padding: 26px 24px 24px; margin: 18px 0 40px;
+    box-shadow: var(--shadow);
+  }
+  .prompt-block .prompt-inner {
+    font-family: "JetBrains Mono", monospace; font-size: 12.8px; line-height: 1.72;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .prompt-block .prompt-inner b { color: var(--amber); font-weight: 600; }
+  .prompt-block .prompt-inner .ph { color: #9d8f70; font-style: italic; }
+  .copy-btn {
+    position: absolute; top: 14px; right: 14px;
+    font-family: "Archivo Narrow", sans-serif; font-weight: 600; font-size: 12px;
+    letter-spacing: 0.02em;
+    background: var(--amber); color: var(--amber-ink);
+    border: none; border-radius: 8px; padding: 7px 13px; cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .copy-btn:hover { opacity: 0.88; }
+  .copy-btn:active { opacity: 0.75; }
+
+  .note {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-soft);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px; margin: 22px 0;
+    font-size: 14px; line-height: 1.6; color: var(--ink);
+  }
+  .note strong { color: var(--amber); }
+
+  .step-list { list-style: none; margin: 0; padding: 0; }
+  .step-list li {
+    display: flex; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list .n {
+    font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 500;
+    color: var(--amber); flex-shrink: 0; padding-top: 2px;
+  }
+  .step-list .t { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+  .step-list .t strong { color: var(--ink); font-weight: 600; }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+  <span class="eyebrow"><span class="dot"></span>RumBee &middot; padronização de 7 apps</span>
+  <h1>Playbook de migração para o RumBee Brand Book</h1>
+  <p class="lede">Dois prompts prontos pra colar como primeira mensagem numa sessão nova do Claude Code em cada um dos outros apps — um pra retrofit de app existente, outro pra bootstrap de app novo. Baseado no processo que funcionou no RumBee Fin (vendorizar o brand book, apontar o CLAUDE.md sob demanda, auditar full-repo, corrigir em lotes com conferência ao vivo).</p>
+
+  <div class="card">
+    <h2><span class="num">0</span>Antes de tudo: crie o repo dedicado do Brand Book</h2>
+    <p>Você decidiu centralizar o RumBee Brand Book num repo Git próprio (ex.: <code>rumbee/brand-book</code>) em vez de reanexar o zip em cada app — é o jeito certo pra manter os 7 apps sincronizados quando o brand book evoluir. Esse repo <strong>ainda não existe</strong>; um jeito rápido de criar a semente dele é extrair o que já está pronto e vendorizado em <code>docsales-fin-automation/docs/design-system/rumbee-brand/</code> (README, BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*) — já é o pacote original recebido, limpo e commitado.</p>
+    <p>Os dois prompts abaixo referenciam esse repo como <code class="ph">&lt;URL do rumbee-brand-book&gt;</code> — troque pelo link real antes de colar.</p>
+  </div>
+
+  <h2 class="section"><span class="badge a">Prompt A</span></h2>
+  <p class="section-sub">Pros <strong>5 apps existentes</strong> — troca 100% o design system atual pelo RumBee, mantendo só o que for específico do domínio do produto (não de estilo visual).</p>
+
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt('prompt-a', this)">Copiar</button>
+    <div class="prompt-inner" id="prompt-a">Este app vai adotar 100% o RumBee Brand Book como design system — trocar tudo que existe hoje (cores, tipografia, espaçamento, componentes visuais) pelo padrão RumBee, mantendo só o que for específico do <b>domínio</b> deste produto (fluxos de negócio, não estilo visual).
+
+## Passo 1 — Baseline: o que existe hoje
+
+Antes de mudar qualquer coisa, leia e resuma (não mude nada ainda):
+- Documentação de design/UI existente (DESIGN.md, STYLEGUIDE.md ou equivalente — se não existir, inventarie direto no código: tema, tokens, tailwind.config, CSS variables).
+- Stack de frontend real (framework, se usa Tailwind ou CSS puro/outra lib de estilo, se já tem um design system de componentes tipo shadcn/MUI).
+- Onde vivem os componentes visuais reutilizáveis hoje.
+
+## Passo 2 — Traga o RumBee Brand Book pro repo
+
+Clone/copie o conteúdo de <span class="ph">&lt;URL do rumbee-brand-book&gt;</span> pra <b>docs/design-system/rumbee-brand/</b> (ou o local equivalente de docs deste projeto): README.md, BRAND.md, DESIGN.md, INTERACTIONS.md, META.md, AI-AGENT.md, tokens.css, assets/*. Trate como material vendorizado — referência, não editar à mão.
+
+Aponte o arquivo de instruções do agente deste repo (CLAUDE.md/AGENTS.md) pra esse material, <b>sob demanda</b> (não auto-carregado) — AI-AGENT.md é o ponto de entrada (regras compactas), DESIGN.md/INTERACTIONS.md pro detalhe.
+
+tokens.css usa CSS custom properties puras — funciona em qualquer stack. Se este projeto usa Tailwind, mapeie o tailwind.config pra apontar pros var(--...) do tokens.css (cores, radius, shadow etc.) em vez de duplicar valores. Se não usa Tailwind, aplique as CSS variables direto no tema/CSS global.
+
+## Passo 3 — Decida o que sobra de específico deste produto
+
+Depois de ler o Brand Book, identifique o que é genuinamente específico deste app (vocabulário de domínio, padrões de tela que a marca genérica não cobre) vs. o que é só estilo que o Brand Book já resolve. Documente só a parte específica, se sobrar alguma, num arquivo de produto separado e curto — a marca genérica nunca é duplicada ali, só referenciada.
+
+## Passo 4 — Auditoria full-repo
+
+Rode uma auditoria completa (não só diff) comparando toda tela/modal do app contra o Brand Book. Se este ambiente já tem o skill <code>/impeccable</code> instalado, use <code>/impeccable audit</code>; senão, faça você mesmo uma varredura por área/tela, produzindo uma lista de achados com severidade (P0-P3) e arquivo:linha de cada um.
+
+## Passo 5 — Corrija tudo, em lotes
+
+Aplique os achados agrupados por tema (cores/tokens, tipografia, formulários, tabelas, modais...) — nunca um PR gigante único. Pra cada lote: um PR próprio, rode a suíte de qualidade que este repo já usa (testes/lint/typecheck — o que o CLAUDE.md/AGENTS.md daqui já mandar), e qualquer mudança visualmente observável precisa de conferência ao vivo no browser (screenshot ou preview rodando) antes de considerar o lote pronto — não basta o build passar.
+
+## Passo 6 — Fechamento
+
+No final, AI-AGENT.md/DESIGN.md/INTERACTIONS.md do Brand Book devem ser a fonte de verdade pra qualquer UI nova daqui pra frente — deixe isso explícito no CLAUDE.md/AGENTS.md do repo.</div>
+  </div>
+
+  <h2 class="section"><span class="badge b">Prompt B</span></h2>
+  <p class="section-sub">Pros <strong>2 apps novos</strong> — sem retrofit, sem auditoria inicial: o Brand Book é o único design system desde o primeiro commit de UI.</p>
+
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyPrompt('prompt-b', this)">Copiar</button>
+    <div class="prompt-inner" id="prompt-b">Este é um app <b>novo</b> — desde o primeiro commit de UI, o design system é o RumBee Brand Book, sem estilo ad hoc.
+
+## Passo 1 — Traga o Brand Book antes de qualquer tela
+
+Clone/copie <span class="ph">&lt;URL do rumbee-brand-book&gt;</span> pra <b>docs/design-system/rumbee-brand/</b>. Leia AI-AGENT.md primeiro (regras compactas) — é referência obrigatória antes de escrever qualquer componente visual.
+
+## Passo 2 — Wire os tokens
+
+tokens.css (CSS custom properties, funciona em qualquer stack) é a fonte de cor/tipografia/espaçamento/radius/shadow. Se o projeto for Tailwind, configure o tailwind.config pra apontar pros var(--...) de lá (nunca duplicar valores hardcoded). Se não for Tailwind, importe as CSS variables direto no CSS global.
+
+## Passo 3 — Regra permanente
+
+Toda tela/componente novo referencia AI-AGENT.md/DESIGN.md/INTERACTIONS.md antes de inventar cor, espaçamento ou padrão de interação novo. Nenhum valor de estilo é hardcoded — sempre via token. Documente só o que for genuinamente específico deste produto (nunca duplicando o que já está no Brand Book) num arquivo de produto separado, se e quando surgir necessidade.
+
+## Passo 4 — Higiene contínua
+
+Periodicamente (ex.: a cada N telas novas), rode uma auditoria de conformidade contra o Brand Book — <code>/impeccable audit</code> se disponível, ou uma varredura manual — pra pegar drift cedo, antes de virar dívida.</div>
+  </div>
+
+  <div class="note"><strong>Sobre o CLAUDE.md de cada repo:</strong> os dois prompts assumem que cada app tem (ou vai ganhar) seu próprio CLAUDE.md/AGENTS.md — não referenciam o do docsales-fin-automation. Cada repo mantém suas próprias convenções de PR/teste/audit; só o apontamento pro Brand Book é padronizado entre todos.</div>
+
+  <h2 class="section">Quando usar qual</h2>
+  <ul class="step-list">
+    <li><span class="n">A</span><span class="t"><strong>App existente com UI rodando</strong> — mesmo que o design atual seja bem diferente do RumBee. O Passo 1 (baseline) é o que evita destruir contexto de negócio por engano.</span></li>
+    <li><span class="n">B</span><span class="t"><strong>App ainda não iniciado, ou com só scaffold/sem tela real</strong> — não faz sentido auditar o que não existe; o objetivo é nunca acumular a dívida que os outros 5 apps têm hoje.</span></li>
+  </ul>
+
+  <footer>Baseado no processo aplicado no RumBee Fin (docsales-fin-automation) — vendorização em <code>docs/design-system/rumbee-brand/</code>, CLAUDE.md sob demanda, <code>/impeccable audit</code> Rodada 3, correção em 7 PRs por tema.</footer>
+</div>
+
+<script>
+function copyPrompt(id, btn) {
+  try {
+    var text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copiado!';
+      setTimeout(function () { btn.textContent = original; }, 1600);
+    }).catch(function () {
+      btn.textContent = 'Selecione e copie';
+    });
+  } catch (e) {
+    btn.textContent = 'Selecione e copie';
+  }
+}
+</script>
