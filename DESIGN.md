@@ -30,7 +30,7 @@ components:
 
 # RumBee — Sistema de Design
 
-Versão 1.1 · Outubro 2026 · **genérico, para qualquer produto RumBee**
+Versão 1.2 · Outubro 2026 · **genérico, para qualquer produto RumBee**
 
 Este documento define **como uma coisa é**: token, anatomia, medida, contraste.
 **Como uma coisa se comporta** — onde fica o CTA, o que o clique na linha faz, onde vive o
@@ -211,8 +211,17 @@ diferentes parecerem a mesma empresa** — não mude por produto.
   fundo âmbar preenchido.
 - **Recolhida, todo item tem tooltip** no hover: pílula `--surface-raised` a 54px da
   esquerda, centrada na vertical, `z-index:40`. Sem isso o menu recolhido é adivinhação.
-- **Rodapé:** avatar 28px âmbar + nome + e-mail, abrindo menu para cima (224px) com
-  alternar tema, configurações do perfil, separador e encerrar sessão (vermelho).
+- **Rodapé, o menu do usuário:** avatar 28px âmbar + nome + e-mail (recolhida, só o
+  avatar, com tooltip do e-mail). Abre um menu para cima (224px), nesta ordem:
+  1. e-mail da conta, como rótulo;
+  2. **Alternar tema.** O toggle mora aqui, não no topbar. Persistido em
+     `localStorage`; sem valor salvo, segue `prefers-color-scheme`;
+  3. **Idioma**, quando o produto tem mais de um;
+  4. **Gerenciar conta**, que abre o painel de conta do RumBee ID (§3.4), e as
+     configurações de perfil próprias do produto, se houver;
+  5. separador, **Termos de uso** e **Política de privacidade** (§3.4, nova aba);
+  6. separador e **Encerrar sessão** (vermelho).
+
   **O usuário vive no rodapé da sidebar, não no topbar.**
 
 **Grupo:** item que agrupa outros e não tem endereço próprio. Clicar só abre ou fecha;
@@ -252,15 +261,34 @@ nunca navega.
 
 ### 3.2 Topbar (80px)
 
-Só duas coisas: **busca global** e **toggle de tema**.
+No máximo duas coisas: a **busca global**, quando o produto tem, e o **launcher de apps**
+do RumBee ID.
 
-- **Busca:** pílula de 50px, `max-width:760px`, `flex:1`, fundo `--search-bg`, ícone de
-  lupa 20px a 20px da esquerda, texto 15px, padding-left 54px. No foco, borda âmbar +
-  anel `rgba(232,160,32,0.15)` de 4px e fundo sobe para `--surface`. É a ferramenta mais
-  usada do produto — tratar como campo principal, não como acessório.
-- **Toggle de tema:** circular 40px à direita. Persistido em `localStorage`; sem valor
-  salvo, segue `prefers-color-scheme`.
-- **Nada mais.** Sem avatar, sem notificação, sem breadcrumb — tudo isso tem outro lugar.
+- **Barra:** 80px, `position:sticky; top:0`, fundo `--bg`, `border-bottom: 1px solid
+  var(--border)`, `padding: 0 32px` (16px abaixo de 768px). Existe mesmo sem busca: as
+  medidas do conteúdo (§3.3) contam a partir dela.
+- **Busca:** só em produto que tem busca global. Pílula de 50px, `max-width:760px`,
+  `flex:1`, fundo `--search-bg`, ícone de lupa 20px a 20px da esquerda, texto 15px,
+  padding-left 54px. No foco, borda âmbar + anel `rgba(232,160,32,0.15)` de 4px e fundo
+  sobe para `--surface`. Onde existe, é a ferramenta mais usada do produto — tratar como
+  campo principal, não como acessório. Sem busca, o topbar fica só com o launcher,
+  alinhado à direita (`justify-content:flex-end`).
+- **Launcher:** à direita, num slot do próprio topbar, montado pelo script do ID:
+
+  ```html
+  <div id="rumbee-launcher-slot"></div>
+  <!-- no fim do <body> -->
+  <script src="https://id.rumbee.ai/launcher.js" data-container="#rumbee-launcher-slot"
+          data-theme="auto" data-lang="pt" defer></script>
+  ```
+
+  O botão (40px) e o painel são do RumBee ID: não reestilize, não copie, não
+  reimplemente. `data-theme="auto"` acompanha o `data-theme` do `<html>`. O launcher
+  autentica com a sessão Clerk da página (§3.4); o contrato do token está no
+  `packages/satellite-sdk` do repo `docsales/rumbee-ID`. Sem o slot, ele flutua no canto
+  da tela, e isso é fallback, não layout.
+- **Nada mais.** Sem toggle de tema (está no menu do usuário), sem avatar, sem
+  notificação, sem breadcrumb: tudo isso tem outro lugar.
 
 ### 3.3 Conteúdo
 
@@ -285,6 +313,33 @@ Só duas coisas: **busca global** e **toggle de tema**.
   própria largura (`max-width`), mas nunca fica centralizado numa coluna estreita.
   Tabelas ocupam a largura toda.
 - Celular (<768px): `padding: 20px 16px 32px`.
+- **App logado não tem rodapé de página.** O conteúdo termina no último bloco; Termos e
+  Privacidade ficam no menu do usuário (§3.1).
+
+### 3.4 Login, conta e termos
+
+- **Login, cadastro e conta são do RumBee ID** (`id.rumbee.ai`). O produto não tem tela
+  de login, cadastro nem recuperação de senha: quem chega sem sessão vai pro login do ID
+  com a URL de volta, e a sessão é a do Clerk compartilhado pelos `*.rumbee.ai`. Um
+  `/login` legado só redireciona. Integração: `packages/satellite-sdk` do repo
+  `docsales/rumbee-ID` (comece pelo `AI-AGENT.md` de lá).
+- **Gerenciar conta**, no menu do usuário, abre o painel de conta do RumBee ID. Nunca
+  uma tela de perfil reimplementada para nome, e-mail, senha ou login social.
+- **Termos e privacidade** moram no site institucional, numa URL só para a família toda:
+
+  | Documento | URL canônica |
+  |---|---|
+  | Termos de uso | `https://www.rumbee.ai/pt-br/termos-de-uso` |
+  | Política de privacidade | `https://www.rumbee.ai/pt-br/politica-de-privacidade` |
+
+  O produto guarda as duas numa constante única e não hospeda cópia do texto. Se precisa
+  de rota própria (`/termos`), ela redireciona pra URL canônica. Os links abrem em nova
+  aba, com `rel="noopener noreferrer"`.
+- **Tela pública tem rodapé legal:** erro, 404, página aberta por link-token e página
+  pública do produto. Uma linha centralizada: `Termos de uso · Política de privacidade ·
+  © <ano> RumBee`, 12.5px, `--text-muted`, links na mesma cor com sublinhado no hover,
+  separador `·` (nunca `|`), `border-top: 1px solid var(--border)`, `padding: 16px`. Item
+  próprio do produto (ex.: "Denunciar abuso") entra depois dos dois legais, antes do ©.
 
 ---
 
@@ -505,6 +560,9 @@ Antes de abrir PR, passe a tela por isto:
 - [ ] Dark **e** light conferidos na tela real, não só no token.
 - [ ] Um único botão primário âmbar; âmbar visivelmente abaixo de 8% da área.
 - [ ] Sidebar grafite nos dois temas; tooltip funcionando recolhida.
+- [ ] Topbar só com a busca (se o produto tem) e o launcher do RumBee ID; tema, idioma,
+      conta, Termos e Privacidade no menu do usuário.
+- [ ] Sem tela de login própria; app logado sem rodapé; tela pública com rodapé legal.
 - [ ] Nenhuma rolagem lateral em tabela que cabe na largura.
 - [ ] Todo botão, badge e cabeçalho com `nowrap`.
 - [ ] Os quatro estados da lista existem.
@@ -542,6 +600,12 @@ rumbee-brand/
 
 ## 11. Changelog
 
+- **1.2 · 2026-10-12** — Topbar passa a ter a busca global só quando o produto tem e
+  ganha o launcher de apps do RumBee ID (§3.2); o toggle de tema sai do topbar e fica no
+  menu do usuário, que ganha ordem fixa com idioma, Gerenciar conta, Termos e Privacidade
+  (§3.1). Nova §3.4: login e conta pelo RumBee ID, URLs canônicas de termos e
+  privacidade, app logado sem rodapé, rodapé legal nas telas públicas. O shell segue o
+  do RumBee Link.
 - **1.1 · 2026-10-12** — Cabeçalho de página vira componente (§4.10); overline opcional
   (§2.4); densidade vertical explícita (§3.3), com padding de celular. Grupo de navegação
   na sidebar (§3.1). `--rb-size-h1` cai de 26px para 24px, como no FIN; ritmo entre

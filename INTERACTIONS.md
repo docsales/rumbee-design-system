@@ -1,6 +1,6 @@
 # RumBee — Regras de Interação e Definições
 
-Versão 1.1 · Outubro 2026
+Versão 1.2 · Outubro 2026
 
 `DESIGN.md` responde **como uma coisa é**. Este documento responde **como uma coisa se
 comporta**: onde fica o botão, o que o clique faz, o que a confirmação pergunta, onde vive
@@ -416,6 +416,11 @@ Nunca mostre "pago" antes de o servidor confirmar.
 - **Grupo de navegação só abre e fecha, nunca navega.** Abre sozinho na página de um
   filho; a rota do grupo redireciona pro primeiro filho; cada filho é uma página, sem
   abas. Anatomia em `DESIGN.md` §3.1.
+- **Termos e Privacidade abrem em nova aba** (`rel="noopener noreferrer"`), a partir do
+  menu do usuário: o usuário não perde a tela em que estava. App logado não tem rodapé
+  de página (`DESIGN.md` §3.4).
+- **Sem sessão, o produto manda pro login do RumBee ID** com a URL de volta; depois do
+  login, o usuário cai na tela que pediu, não numa home genérica.
 - **Estado navegável vive na URL:** período, filtros, aba, ordenação, página, registro
   aberto. Se o usuário não pode mandar o link para um colega e ver a mesma coisa, o estado
   está no lugar errado.
