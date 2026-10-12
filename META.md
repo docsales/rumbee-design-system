@@ -1,6 +1,6 @@
 # RumBee — Web, meta tags e favicons
 
-Versão 1.0 · Setembro 2026
+Versão 1.1 · Outubro 2026
 
 Padrão de `<head>`, títulos, descrições e ícones para qualquer página RumBee — site
 público, app autenticado ou página compartilhável.
@@ -59,8 +59,17 @@ Copie inteiro e troque só o que está entre `{}`.
 
 ```html
 <meta name="robots" content="noindex, nofollow">
+```
+
+E, **só se o servidor não mandar `Referrer-Policy` igual ou mais restrita**:
+
+```html
 <meta name="referrer" content="strict-origin-when-cross-origin">
 ```
+
+A meta substitui a política do header. Se o servidor já manda `Referrer-Policy:
+no-referrer` (padrão do helmet, por exemplo), ela **afrouxa** a política: o destino de um
+link passa a receber a origem do app.
 
 **Página com link-token (dashboard compartilhado, proposta, documento):** `noindex` é
 **obrigatório** — link não listado que o Google indexa deixa de ser não listado.

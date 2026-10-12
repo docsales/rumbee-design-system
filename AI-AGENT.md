@@ -57,8 +57,9 @@ hex, pare — o token já existe.
 - **Rodapé de modal:** destrutiva na extremidade esquerda; à direita `[Cancelar]` e depois
   a primária âmbar, sempre a última.
 - **Confirmação nunca usa Sim/Não.** Título = `<Verbo> <objeto>?`; corpo nomeia o objeto e
-  diz a consequência; botões = verbo da ação vs resultado de não agir (`[Manter
-  lançamento] [Excluir]`). Foco inicial no recuo, `Esc` cancela, overlay não fecha.
+  diz a consequência; botões = verbo da ação à esquerda, em fill vermelho, e `Cancelar`
+  à direita (`[Excluir] … [Cancelar]`, `INTERACTIONS.md` §4.2). Foco inicial no recuo,
+  `Esc` cancela, overlay não fecha.
 - **Reversível → toast com "Desfazer"; irreversível → confirmação.** Confirmar tudo treina
   o usuário a não ler.
 - **Toast de sucesso traz número** ("8 lançamentos conciliados").
@@ -77,7 +78,7 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 │ sidebar  │ topbar 80px: busca global + toggle de tema   │
 │ 216/68px ├──────────────────────────────────────────────┤
 │ #0B0D10  │ conteúdo: padding 28px 32px 40px, gap 16px   │
-│          │   1. overline RUMBEE <PRODUTO> + h1 + sub    │
+│          │   1. cabeçalho: h1 + sub, ações à direita    │
 │  logo    │   2. barra de contexto (card)                │
 │  nav     │   3. cards de resumo (auto-fit 180px)        │
 │  ...     │   4. filtros da lista                        │
@@ -85,6 +86,8 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 └──────────┴──────────────────────────────────────────────┘
 ```
 
+- **Cabeçalho a 28px do topbar, nada acima, sem hero.** `<h1>` + subtítulo à esquerda,
+  ações de tela à direita (`DESIGN.md` §4.10). Overline `RUMBEE <PRODUTO>` é opcional.
 - **Busca global:** pílula 50px, `max-width:760px`, texto 15px, lupa 20px. É a ferramenta
   mais usada — trate como campo principal.
 - **O usuário mora no rodapé da sidebar** (avatar 28px + nome + e-mail → menu para cima).
@@ -94,6 +97,8 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
   Jamais fundo âmbar preenchido.
 - **Navegação idêntica em todas as telas** — mesmo inventário, mesma ordem, mesmos links.
   Se cada arquivo tem sua própria lista, ela vai divergir: mantenha uma constante única.
+- **Grupo de navegação: botão com `aria-expanded`, nunca link; abre na página de um
+  filho.** Os filhos são `children` do item na constante única (`DESIGN.md` §3.1).
 
 ---
 
@@ -137,7 +142,10 @@ Formatos: `R$ 1.234,56` · `DD/MM/AAAA` · CNPJ `XX.XXX.XXX/XXXX-XX` · negativo
 - [ ] `nowrap` em botões, badges e cabeçalhos.
 - [ ] Quatro estados da lista presentes.
 - [ ] Navegação igual à das outras telas.
-- [ ] Overline `RUMBEE <PRODUTO>` no cabeçalho.
+- [ ] Título a 28px do topbar (20px no celular), à esquerda, com subtítulo; ações à
+      direita; nada acima; sem hero.
+- [ ] Grupo de navegação: abre na página do filho; fechado com filho ativo, a barra
+      âmbar fica no grupo; recolhida, tooltip e nenhum chevron.
 - [ ] Nota de proveniência, se houver proposta sua na tela.
 
 ---

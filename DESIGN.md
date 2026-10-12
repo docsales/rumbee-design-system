@@ -13,7 +13,7 @@ colors:
   paper: "#F7F6F2"
   tinta: "#17181B"
 typography:
-  h1: { fontFamily: "Archivo, system-ui, sans-serif", fontSize: "26px", fontWeight: 700, lineHeight: 1.2 }
+  h1: { fontFamily: "Archivo, system-ui, sans-serif", fontSize: "24px", fontWeight: 700, lineHeight: 1.2, letterSpacing: "-0.02em" }
   h2: { fontFamily: "Archivo, system-ui, sans-serif", fontSize: "20px", fontWeight: 700, lineHeight: 1.3 }
   h3: { fontFamily: "Archivo, system-ui, sans-serif", fontSize: "16px", fontWeight: 600, lineHeight: 1.4 }
   body: { fontFamily: "Archivo, system-ui, sans-serif", fontSize: "13.5px", fontWeight: 400, lineHeight: 1.55 }
@@ -30,7 +30,7 @@ components:
 
 # RumBee — Sistema de Design
 
-Versão 1.0 · Setembro 2026 · **genérico, para qualquer produto RumBee**
+Versão 1.1 · Outubro 2026 · **genérico, para qualquer produto RumBee**
 
 Este documento define **como uma coisa é**: token, anatomia, medida, contraste.
 **Como uma coisa se comporta** — onde fica o CTA, o que o clique na linha faz, onde vive o
@@ -146,17 +146,25 @@ Valores: positivo `--positive`, negativo `--negative` (resolvem por tema).
 
 | Uso | Tamanho | Peso |
 |---|---|---|
-| Título de página | 26px | 700 |
+| Título de página (`line-height:1.2`, `-0.02em`) | 24px | 700 |
+| Subtítulo de página | 13px | 400 |
 | Título de seção | 20px | 700 |
-| Título de card / modal | 16px | 600 |
+| Título de card | 16px | 600 |
+| Título de modal | 16px | 700 |
 | Corpo | 13.5px | 400 |
 | Corpo secundário | 12.5px | 400 |
+| Rótulo de campo de formulário (`--rb-size-label-field`) | 13px | 600 |
 | Rótulo / overline (uppercase, 0.05em) | 11px | 600 |
 | Legenda / metadado | 11.5px | 400 |
 | Número grande de card | 23px | 600 |
 | Valor em tabela | 13.5px | 500–600 |
 | Texto de badge | 11–11.5px | 600 |
 | Busca global | 15px | 400 |
+
+**Overline de página é opcional.** O produto já aparece no logo da sidebar e no `<title>`.
+Se um produto quiser `RUMBEE <PRODUTO>` acima do título, ele fica 4px antes do `<h1>` e os
+28px do topo do conteúdo contam até o overline (§4.10). O estilo de rótulo continua o
+mesmo para cabeçalho de coluna, rótulo de seção e rótulo de campo no detalhe.
 
 ### 2.5 Raio, controle, sombra, foco
 
@@ -178,7 +186,8 @@ Sombra só em coisa que flutua de verdade: menu (`--shadow-md`), modal (`--shado
 Card **não** tem sombra — tem borda. Botão primário pode ter `--glow` âmbar.
 
 Foco: `outline: 2px solid var(--accent); outline-offset: 2px`. Em input, borda âmbar +
-`box-shadow: 0 0 0 3px rgba(232,160,32,0.18)`. **Nunca** o anel azul do browser.
+`box-shadow: var(--focus-ring)` (anel de 3px, âmbar a 18%). **Nunca** o anel azul do
+browser.
 
 Movimento: 150ms para hover/estado, 220ms para entrada, 180ms para largura de sidebar.
 Easing `cubic-bezier(0.16,1,0.3,1)`. **Sem bounce, sem elástico.**
@@ -206,6 +215,41 @@ diferentes parecerem a mesma empresa** — não mude por produto.
   alternar tema, configurações do perfil, separador e encerrar sessão (vermelho).
   **O usuário vive no rodapé da sidebar, não no topbar.**
 
+**Grupo:** item que agrupa outros e não tem endereço próprio. Clicar só abre ou fecha;
+nunca navega.
+
+- **Marcação:** `<button aria-expanded aria-controls>`, com ícone de 18px e rótulo de
+  13.5px como um item. Chevron de 14px à direita: `›` fechado, `⌄` aberto.
+- **Abertura:** abre sozinho na página de um filho; fora disso começa fechado. O estado
+  não é salvo.
+- **Filhos:**
+  - lista com recuo de 21px, para a linha guia ficar no centro do ícone do grupo;
+  - linha guia de 1px em `--chrome-border` à esquerda, com 8px de padding até os itens;
+  - cada filho com ícone (18px) e rótulo (13.5px).
+- **Filho ativo:** a barra âmbar de 3px encosta na linha guia; ícone âmbar e peso 600.
+- **Grupo fechado com filho ativo:** o grupo leva a barra âmbar e o peso 600, para o
+  "onde estou" nunca sumir.
+- **Separador:** antes do grupo vai uma linha de 1px em `--chrome-border`, com 8px de
+  margem.
+- **Sidebar recolhida:**
+  - sem chevron; grupo e filhos com tooltip;
+  - quando a sidebar pode expandir (tela larga), clicar no grupo expande a sidebar e abre
+    o grupo, nunca fecha; a preferência salva passa a ser "expandida";
+  - quando ela não pode expandir (produto que usa trilho fixo em tela estreita, em vez do
+    drawer de §5), o grupo abre e fecha ali mesmo e os filhos viram ícones em sequência,
+    sem recuo e sem linha guia, com a barra ativa na borda.
+- **Rota do grupo:** redireciona pro primeiro filho. Cada filho é uma página, sem abas.
+- **Fonte:** os filhos são `children` do item na constante única de navegação.
+
+| Parte | Valor |
+|---|---|
+| Ícone (grupo e filho) | 18px, `stroke-width` 2 |
+| Chevron | 14px |
+| Recuo dos filhos | 21px |
+| Linha guia | 1px `--chrome-border`, padding-left 8px |
+| Barra ativa | 3px âmbar, cantos `--rb-radius-sm` do lado do conteúdo |
+| Separador | 1px `--chrome-border`, margem vertical 8px |
+
 ### 3.2 Topbar (80px)
 
 Só duas coisas: **busca global** e **toggle de tema**.
@@ -222,14 +266,25 @@ Só duas coisas: **busca global** e **toggle de tema**.
 
 `padding: 28px 32px 40px`, coluna única, `gap:16px`. Ordem canônica:
 
-1. **Cabeçalho:** overline `RUMBEE <PRODUTO>` (11px/600/uppercase) + `<h1>` 26px/700 +
-   uma linha de subtítulo explicando o que a tela resolve; ações de tela à direita.
+1. **Cabeçalho de página** (§4.10): `<h1>` + subtítulo de uma linha à esquerda, ações de
+   tela à direita. Nada acima dele.
 2. **Barra de contexto** — card `--surface`, raio 12px: seletor de entidade, navegador de
    período, segmented, ações de escopo.
 3. **Cards de resumo** — `repeat(auto-fit, minmax(180px, 1fr))`, gap 14px.
 4. **Filtros da lista** — card raso com selects e busca local.
 5. **A tabela.**
 6. **Nota de proveniência** quando a tela é proposta e não recriação (ver §6).
+
+- O cabeçalho é o primeiro elemento do conteúdo: fica a **28px do topbar** (20px abaixo
+  de 768px). Nenhum `margin-top` no primeiro filho; a distância é o padding. As únicas
+  coisas que podem vir antes dele são o overline opcional (§2.4) e a faixa de offline
+  (§4.9), que só aparece enquanto dura.
+- **Tela logada não tem hero.** Sem headline de marketing centrada. A ação principal da
+  tela é a barra de contexto, um card abaixo do cabeçalho.
+- O conteúdo começa na borda esquerda, alinhado ao título. Texto corrido pode limitar a
+  própria largura (`max-width`), mas nunca fica centralizado numa coluna estreita.
+  Tabelas ocupam a largura toda.
+- Celular (<768px): `padding: 20px 16px 32px`.
 
 ---
 
@@ -367,6 +422,24 @@ refinamento posterior:
 E ainda: **offline** (faixa fixa no topo do conteúdo) e **toast** (canto inferior direito,
 `--surface` + borda da semântica, título 13px/600 e corpo 12px em `--text`).
 
+### 4.10 Cabeçalho de página
+
+Primeiro elemento de toda tela logada, a 28px do topbar.
+
+- **Esquerda:** `<h1>` (`--rb-size-h1`/700, `line-height: 1.2`, `letter-spacing:
+  var(--rb-tracking-h1)`, margem 0). Subtítulo 4px abaixo, uma frase dizendo o que a
+  tela resolve, 13px, `--text-muted`.
+- **Direita:** ações de tela, com a primária por último e `nowrap`.
+- **Linha:** `display:flex; flex-wrap:wrap; justify-content:space-between;
+  align-items:flex-start; gap:12px`. No celular as ações descem pra linha de baixo.
+- **Variante compacta:** quando a barra de contexto cabe numa linha, os controles dela
+  (segmentado, período, seletor) entram na linha do título, sem subtítulo
+  (`align-items:center; gap:8px 12px`). O FIN faz isso no Balancete e na DRE.
+- **Variante com abas:** abas sublinhadas na linha do título, com `border-bottom` na
+  linha toda. O FIN faz isso em Pendentes.
+- Até o primeiro bloco: 16px (o `gap` do conteúdo).
+- Não é um `<header>` (`<header>` é landmark; use `<div>`).
+
 ---
 
 ## 5. Padrões de produto
@@ -437,7 +510,8 @@ Antes de abrir PR, passe a tela por isto:
 - [ ] Os quatro estados da lista existem.
 - [ ] Nenhum hex fora de `tokens.css`.
 - [ ] Rótulo 11px lido confortavelmente nos dois temas.
-- [ ] Overline `RUMBEE <PRODUTO>` no cabeçalho da página.
+- [ ] Título a 28px do topbar (20px no celular), à esquerda, com subtítulo; ações à
+      direita; nada acima; sem hero.
 - [ ] Nota de proveniência, se a tela é proposta.
 
 ---
@@ -468,6 +542,12 @@ rumbee-brand/
 
 ## 11. Changelog
 
+- **1.1 · 2026-10-12** — Cabeçalho de página vira componente (§4.10); overline opcional
+  (§2.4); densidade vertical explícita (§3.3), com padding de celular. Grupo de navegação
+  na sidebar (§3.1). `--rb-size-h1` cai de 26px para 24px, como no FIN; ritmo entre
+  blocos continua 16px. Título de modal fica em 16px/700 (§2.4 dizia 600, §4.6 dizia 700).
+  Tokens novos: `--focus-ring`, `--rb-size-label-field`, `--rb-tracking-h1` e
+  `--chrome-border`. Contribuições do RumBee Link.
 - **1.0 · 2026-09-16** — Primeira versão genérica, extraída do sistema do RumBee Fin
   (`DESIGN.md` v3.0 do projeto DocSales-Fin) e generalizada: o seletor de conta bancária
   virou seletor de entidade, o vocabulário financeiro saiu, e as decisões de contraste que

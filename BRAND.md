@@ -1,6 +1,6 @@
 # RumBee — Marca
 
-Versão 1.0 · Setembro 2026
+Versão 1.1 · Outubro 2026
 
 ## 1. O conceito
 
@@ -100,8 +100,9 @@ Regras:
 
 ## 6. Arquitetura de nomes
 
-O produto é `RumBee <Produto>` — RumBee Fin, RumBee Sign, RumBee Docs. Em interface o
-overline de marca é `RUMBEE <PRODUTO>` (11px, 600, uppercase, tracking 0.05em) acima do
-título da página. Nunca o nome do produto sozinho: é o que amarra a família.
+O produto é `RumBee <Produto>` — RumBee Fin, RumBee Sign, RumBee Docs. Em interface ele
+aparece no logo da sidebar e no `<title>` da aba; o overline `RUMBEE <PRODUTO>` (11px,
+600, uppercase, tracking 0.05em) acima do título da página é opcional. Onde o nome
+aparecer, nunca o nome do produto sozinho: é o que amarra a família.
 
 O domínio é `rumbee.ai`; e-mails de exemplo em protótipo usam `@rumbee.ai`.
