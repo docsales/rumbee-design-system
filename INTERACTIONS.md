@@ -1,6 +1,6 @@
 # RumBee — Regras de Interação e Definições
 
-Versão 1.0 · Setembro 2026
+Versão 1.1 · Outubro 2026
 
 `DESIGN.md` responde **como uma coisa é**. Este documento responde **como uma coisa se
 comporta**: onde fica o botão, o que o clique faz, o que a confirmação pergunta, onde vive
@@ -392,7 +392,7 @@ Nunca mostre "pago" antes de o servidor confirmar.
 
 ## 6. Formulários
 
-- **Rótulo acima do campo**, 13px/600. Sem placeholder como rótulo — ele desaparece ao
+- **Rótulo acima do campo**, 13px/600 (`--rb-size-label-field`). Sem placeholder como rótulo — ele desaparece ao
   digitar e deixa o usuário sem referência.
 - **Placeholder é exemplo de formato**: `"voce@rumbee.ai"`, `"XX.XXX.XXX/XXXX-XX"`.
 - **Texto de ajuda** abaixo do campo, 11.5px `--text-muted`, quando a regra não é óbvia.
@@ -413,6 +413,9 @@ Nunca mostre "pago" antes de o servidor confirmar.
 - **Sidebar é o inventário completo** e é idêntica em toda tela: mesmo conjunto, mesma
   ordem. Nada de item que aparece só em algumas telas.
 - **Item ativo reflete a tela atual**, inclusive em sub-rota.
+- **Grupo de navegação só abre e fecha, nunca navega.** Abre sozinho na página de um
+  filho; a rota do grupo redireciona pro primeiro filho; cada filho é uma página, sem
+  abas. Anatomia em `DESIGN.md` §3.1.
 - **Estado navegável vive na URL:** período, filtros, aba, ordenação, página, registro
   aberto. Se o usuário não pode mandar o link para um colega e ver a mesma coisa, o estado
   está no lugar errado.

@@ -1,5 +1,5 @@
 /**
- * RumBee Brand Tokens — v1.0 · Setembro 2026
+ * RumBee Brand Tokens — v1.1 · Outubro 2026
  *
  * Fonte única de verdade para cor, tipografia, raio, sombra e espaçamento
  * de qualquer produto RumBee. Não redefina nenhum destes valores no produto:
@@ -62,16 +62,18 @@
 
   /* ─── Tipografia ───────────────────────────────────────────────── */
   --rb-font: 'Archivo', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-  --rb-size-h1: 26px;   --rb-weight-h1: 700;
+  --rb-size-h1: 24px;   --rb-weight-h1: 700;
   --rb-size-h2: 20px;   --rb-weight-h2: 700;
   --rb-size-h3: 16px;   --rb-weight-h3: 600;
   --rb-size-body: 13.5px;
   --rb-size-body-sm: 12.5px;
   --rb-size-label: 11px;      /* overline: 600, uppercase, 0.05em */
+  --rb-size-label-field: 13px; /* rótulo de campo de formulário: 600 */
   --rb-size-caption: 11.5px;
   --rb-size-search: 15px;
   --rb-size-metric: 23px;     /* número grande de card: 600 */
   --rb-tracking-label: 0.05em;
+  --rb-tracking-h1: -0.02em;
 
   /* ─── Espaçamento ──────────────────────────────────────────────── */
   --rb-space-1: 4px;   --rb-space-2: 8px;   --rb-space-3: 12px;
@@ -105,6 +107,7 @@
   --surface: var(--rb-graf-800);
   --surface-raised: var(--rb-graf-850);
   --chrome: var(--rb-graf-950);
+  --chrome-border: var(--rb-graf-700); /* borda e divisor dentro da sidebar */
   --search-bg: var(--rb-graf-850);
   --header-bg: var(--rb-graf-850);
   --row-hover: var(--rb-graf-750);
@@ -134,6 +137,7 @@
   --shadow-md: 0 10px 24px rgba(0,0,0,0.5);
   --shadow-lg: 0 20px 44px -10px rgba(0,0,0,0.7);
   --glow: 0 2px 20px rgba(232,160,32,0.30);
+  --focus-ring: 0 0 0 3px rgba(232,160,32,0.18); /* anel de input em foco */
   --overlay: rgba(11,13,16,0.6);
 }
 
@@ -143,6 +147,7 @@
   --surface: var(--rb-paper-50);
   --surface-raised: var(--rb-paper-200);
   --chrome: var(--rb-graf-950);        /* a sidebar NUNCA clareia */
+  --chrome-border: var(--rb-graf-700); /* nem a borda dela */
   --search-bg: var(--rb-paper-300);
   --header-bg: var(--rb-paper-200);
   --row-hover: var(--rb-paper-100);
@@ -172,6 +177,7 @@
   --shadow-md: 0 10px 24px rgba(14,16,19,0.10);
   --shadow-lg: 0 20px 44px -10px rgba(14,16,19,0.18);
   --glow: 0 2px 16px rgba(232,160,32,0.25);
+  --focus-ring: 0 0 0 3px rgba(232,160,32,0.18); /* igual nos dois temas */
   --overlay: rgba(14,16,19,0.35);
 }
 

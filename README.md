@@ -1,6 +1,6 @@
 # RumBee Brand Book — pacote de design para desenvolvimento com IA
 
-Versão 1.0 · Setembro 2026
+Versão 1.1 · Outubro 2026
 
 Este pacote é o **ponto de partida de qualquer produto RumBee**. Ele não descreve um
 produto específico: descreve a marca, os tokens e os padrões de interface que todo
