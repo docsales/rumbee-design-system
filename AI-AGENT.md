@@ -75,7 +75,7 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 
 ```
 ┌──────────┬──────────────────────────────────────────────┐
-│ sidebar  │ topbar 80px: busca global + toggle de tema   │
+│ sidebar  │ topbar 80px: busca (se houver) + launcher    │
 │ 216/68px ├──────────────────────────────────────────────┤
 │ #0B0D10  │ conteúdo: padding 28px 32px 40px, gap 16px   │
 │          │   1. cabeçalho: h1 + sub, ações à direita    │
@@ -83,16 +83,34 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 │  nav     │   3. cards de resumo (auto-fit 180px)        │
 │  ...     │   4. filtros da lista                        │
 │  user ▲  │   5. tabela                                  │
+│          │   (sem rodapé de página)                     │
 └──────────┴──────────────────────────────────────────────┘
 ```
 
 - **Cabeçalho a 28px do topbar, nada acima, sem hero.** `<h1>` + subtítulo à esquerda,
   ações de tela à direita (`DESIGN.md` §4.10). Overline `RUMBEE <PRODUTO>` é opcional.
-- **Busca global:** pílula 50px, `max-width:760px`, texto 15px, lupa 20px. É a ferramenta
-  mais usada — trate como campo principal.
-- **O usuário mora no rodapé da sidebar** (avatar 28px + nome + e-mail → menu para cima).
-  **Não** coloque avatar no topbar.
-- **Topbar tem só duas coisas.** Sem breadcrumb, sem notificação, sem avatar.
+- **Topbar: a busca global, só se o produto tem, e o launcher do RumBee ID à direita.**
+  Nada mais: sem toggle de tema, sem breadcrumb, sem notificação, sem avatar.
+- **Busca global:** pílula 50px, `max-width:760px`, texto 15px, lupa 20px. Onde existe, é
+  a ferramenta mais usada — trate como campo principal.
+- **Launcher:** `<div id="rumbee-launcher-slot">` no topbar + `<script
+  src="https://id.rumbee.ai/launcher.js" data-container="#rumbee-launcher-slot"
+  data-theme="auto" data-lang="pt" defer>`. Botão e painel são do ID: não reestilize nem
+  reimplemente (`DESIGN.md` §3.2).
+- **O usuário mora no rodapé da sidebar** (avatar 28px + nome + e-mail → menu para cima,
+  nesta ordem): e-mail · Alternar tema · Idioma (se houver) · Gerenciar conta (painel do
+  RumBee ID) · — · Termos de uso · Política de privacidade · — · Encerrar sessão
+  (vermelho). **Não** coloque avatar nem tema no topbar.
+- **Login, cadastro e conta são do RumBee ID** (`id.rumbee.ai`, Clerk compartilhado).
+  Nada de tela de login própria; integre pelo `packages/satellite-sdk` do repo
+  `docsales/rumbee-ID` (`DESIGN.md` §3.4).
+- **Termos e privacidade** têm URL única na família:
+  `https://www.rumbee.ai/pt-br/termos-de-uso` e
+  `https://www.rumbee.ai/pt-br/politica-de-privacidade`, numa constante, em nova aba.
+  Nunca uma cópia do texto no produto.
+- **App logado sem rodapé de página.** Tela pública (erro, 404, link-token, página
+  pública) tem o rodapé legal: `Termos de uso · Política de privacidade · © <ano>
+  RumBee`, 12.5px `--text-muted`, centralizado, separador `·`.
 - **Item de menu ativo:** ícone âmbar + peso 600 + barra vertical âmbar de 3px à esquerda.
   Jamais fundo âmbar preenchido.
 - **Navegação idêntica em todas as telas** — mesmo inventário, mesma ordem, mesmos links.
@@ -104,8 +122,8 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 
 ## Tema
 
-Dark é a âncora da marca. Persista a escolha em `localStorage`; sem valor salvo, siga
-`prefers-color-scheme`. O tema claro **não** é o escuro invertido: as semânticas do claro
+Dark é a âncora da marca. O toggle fica no menu do usuário, não no topbar. Persista a
+escolha em `localStorage`; sem valor salvo, siga `prefers-color-scheme`. O tema claro **não** é o escuro invertido: as semânticas do claro
 são tints opacos com tinta profunda (`#D6F5E6` + `#046B4D`), não `rgba()` sobre paper.
 
 ---
@@ -138,6 +156,10 @@ Formatos: `R$ 1.234,56` · `DD/MM/AAAA` · CNPJ `XX.XXX.XXX/XXXX-XX` · negativo
 - [ ] Dark e light conferidos na tela renderizada.
 - [ ] Um primário âmbar; âmbar claramente abaixo de 8%.
 - [ ] Sidebar grafite nos dois temas, com tooltip quando recolhida.
+- [ ] Topbar só com a busca (se houver) e o launcher; tema, idioma, conta, Termos e
+      Privacidade no menu do usuário, na ordem do shell.
+- [ ] Sem tela de login própria (RumBee ID); app logado sem rodapé; tela pública com o
+      rodapé legal.
 - [ ] Nenhuma rolagem lateral em tabela que cabe.
 - [ ] `nowrap` em botões, badges e cabeçalhos.
 - [ ] Quatro estados da lista presentes.

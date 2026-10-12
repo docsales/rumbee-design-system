@@ -1,6 +1,6 @@
 # RumBee — Web, meta tags e favicons
 
-Versão 1.1 · Outubro 2026
+Versão 1.2 · Outubro 2026
 
 Padrão de `<head>`, títulos, descrições e ícones para qualquer página RumBee — site
 público, app autenticado ou página compartilhável.
@@ -159,6 +159,9 @@ Sem adjetivo de marketing, sem lista de palavras-chave, sem repetir o título.
 | Institucional | `rumbee.ai` |
 | Marca / brand book público | `rumbee.ai/marca` |
 | Produto | `{produto}.rumbee.ai` — `fin.rumbee.ai` |
+| Login, conta e launcher de apps | `id.rumbee.ai` (RumBee ID) — `DESIGN.md` §3.4 |
+| Termos de uso | `https://www.rumbee.ai/pt-br/termos-de-uso` |
+| Política de privacidade | `https://www.rumbee.ai/pt-br/politica-de-privacidade` |
 | E-mail | `{nome}@rumbee.ai` |
 
 `data-theme="dark"` no `<html>` é o padrão; o app troca para `light` conforme
