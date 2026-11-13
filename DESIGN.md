@@ -106,7 +106,7 @@ sem `if`.
 |---|---|---|
 | `--accent` | `#E8A020` | fill de primário, barra do item ativo, anel de foco, barra de gráfico "previsto" |
 | `--accent-on` | `#17130A` | texto sobre fill âmbar (12.6:1) |
-| `--accent-ink` | dark `#E8A020` · light `#8A5A05` | **texto ou link** em âmbar |
+| `--accent-ink` | dark `#E8A020` · light `#8A5A05` | **texto, link ou radio marcado** em âmbar |
 | `--accent-tint` | dark `rgba(232,160,32,0.10)` · light `#FDF3E2` | fundo de linha selecionada, etapa ativa |
 
 > **A armadilha:** `#E8A020` com texto branco dá 2.1:1 — reprova. A solução não é clarear
@@ -449,6 +449,11 @@ tela. Uma anatomia só, em todo o produto:
   **borda âmbar**; não selecionado = borda `--border` e opacidade 0.5–0.75.
   **Fundo âmbar preenchido nunca indica seleção.**
 - **Segmented:** trilha `--bg` com borda, opção ativa em `--surface` peso 600.
+- **Radio:** marcado = `--accent-ink` (âmbar no escuro, `#8A5A05` no claro: o estado do
+  controle precisa de 3:1 contra o fundo, e o âmbar-500 dá 2:1 sobre paper); desmarcado =
+  aro vazio nos dois temas. A regra mora no `tokens.css` — inclusive o `color-scheme` do
+  radio, sem o qual o browser pinta o desmarcado como disco branco no escuro e ele fica
+  igual ao marcado. **O produto nunca troca a cor do radio por classe** (`accent-*`).
 - **Filtros de lista:** card raso com selects de 38px e uma busca local — distinta da
   busca global do topbar, e rotulada como "Buscar nesta lista".
 - **Etapas (stepper):** pílulas com número em círculo 20px; concluída = `ok`, ativa =
@@ -600,6 +605,10 @@ rumbee-brand/
 
 ## 11. Changelog
 
+- **1.2.1 · 2026-11-13** — Radio marcado em `--accent-ink` e desmarcado como aro vazio
+  nos dois temas (§2.2, §4.7), regra no `tokens.css`. Veio do FIN: no escuro, o radio
+  desmarcado saía como disco branco, igual ao marcado, e o operador leu a opção errada
+  numa tela de pagamento.
 - **1.2 · 2026-10-12** — Topbar passa a ter a busca global só quando o produto tem e
   ganha o launcher de apps do RumBee ID (§3.2); o toggle de tema sai do topbar e fica no
   menu do usuário, que ganha ordem fixa com idioma, Gerenciar conta, Termos e Privacidade
