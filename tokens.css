@@ -226,3 +226,11 @@ a:hover { text-decoration: underline; }
   outline-offset: 2px;
   border-radius: var(--rb-radius-sm);
 }
+/* Radio nativo: marcado = --accent-ink (âmbar-500 no escuro; amber-ink no claro, porque o
+   âmbar-500 dá 2:1 sobre paper). Sem color-scheme o browser pinta o desmarcado como disco
+   branco no escuro e ele fica igual ao marcado: o radio declara o tema dele. */
+input[type="radio"] { accent-color: var(--accent-ink); color-scheme: dark; }
+[data-theme="light"] input[type="radio"] { color-scheme: light; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) input[type="radio"] { color-scheme: light; }
+}
