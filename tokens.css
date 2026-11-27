@@ -139,6 +139,10 @@
   --glow: 0 2px 20px rgba(232,160,32,0.30);
   --focus-ring: 0 0 0 3px rgba(232,160,32,0.18); /* anel de input em foco */
   --overlay: rgba(11,13,16,0.6);
+  /* Launcher de apps (DESIGN.md §4.11): único painel translúcido do sistema */
+  --launcher-bg: rgba(27,32,40,0.78);
+  --launcher-edge: inset 0 1px 0 rgba(255,255,255,0.10);
+  --app-icon-shadow: drop-shadow(0 4px 7px rgba(0,0,0,0.45));
 }
 
 /* ─── Tema light ──────────────────────────────────────────────────── */
@@ -179,6 +183,9 @@
   --glow: 0 2px 16px rgba(232,160,32,0.25);
   --focus-ring: 0 0 0 3px rgba(232,160,32,0.18); /* igual nos dois temas */
   --overlay: rgba(14,16,19,0.35);
+  --launcher-bg: rgba(255,255,255,0.80);
+  --launcher-edge: inset 0 1px 0 rgba(255,255,255,0.90);
+  --app-icon-shadow: drop-shadow(0 4px 7px rgba(14,16,19,0.18));
 }
 
 @media (prefers-color-scheme: light) {
@@ -205,6 +212,9 @@
     --positive: var(--rb-ok-light-text);
     --negative: var(--rb-err-light-text);
     --overlay: rgba(14,16,19,0.35);
+    --launcher-bg: rgba(255,255,255,0.80);
+    --launcher-edge: inset 0 1px 0 rgba(255,255,255,0.90);
+    --app-icon-shadow: drop-shadow(0 4px 7px rgba(14,16,19,0.18));
   }
 }
 

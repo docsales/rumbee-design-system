@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<defs>
+<linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#FF6B4F"/><stop offset="1" stop-color="#F0102E"/></linearGradient>
+<radialGradient id="hl" gradientUnits="userSpaceOnUse" cx="34" cy="8" r="92"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".5" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="rim" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/><stop offset=".8" stop-color="#000" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+<linearGradient id="floor" gradientUnits="userSpaceOnUse" x1="60" y1="70" x2="60" y2="120"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+<linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="60" y1="26" x2="60" y2="96"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".86"/></linearGradient>
+<filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="3.2" flood-color="#7A0010" flood-opacity=".38"/></filter>
+<clipPath id="c"><path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z"/></clipPath>
+
+</defs>
+<g clip-path="url(#c)">
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#bg)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#hl)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#floor)"/>
+<g filter="url(#sh)">
+<g transform="translate(60 60) rotate(-45)" fill="none" stroke-width="8.5">
+<rect x="-9" y="-12.5" width="44" height="25" rx="12.5" stroke="#fff" stroke-opacity=".62"/>
+<rect x="-35" y="-12.5" width="44" height="25" rx="12.5" stroke="#fff"/>
+</g></g>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="none" stroke="url(#rim)" stroke-width="2.4"/>
+</g>
+</svg>

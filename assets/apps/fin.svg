@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<defs>
+<linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#4DF56E"/><stop offset="1" stop-color="#00A832"/></linearGradient>
+<radialGradient id="hl" gradientUnits="userSpaceOnUse" cx="34" cy="8" r="92"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".5" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="rim" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/><stop offset=".8" stop-color="#000" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+<linearGradient id="floor" gradientUnits="userSpaceOnUse" x1="60" y1="70" x2="60" y2="120"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+<linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="60" y1="26" x2="60" y2="96"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".86"/></linearGradient>
+<filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="3.2" flood-color="#004D17" flood-opacity=".38"/></filter>
+<clipPath id="c"><path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z"/></clipPath>
+
+</defs>
+<g clip-path="url(#c)">
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#bg)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#hl)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#floor)"/>
+<g filter="url(#sh)">
+<path d="M60 27 L85 36 V58 C85 75 75 87 60 94 C45 87 35 75 35 58 V36 Z" fill="url(#gl)" stroke="url(#gl)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M69 51 C69 46 65 43.5 60 43.5 C54.5 43.5 51 46.5 51 51 C51 55.5 55 57.3 60 58.8 C65.5 60.4 69.5 62.3 69.5 67.2 C69.5 72 65.5 75 60 75 C54.3 75 50.5 72 50.5 67" fill="none" stroke="#008A2B" stroke-width="5.2" stroke-linecap="round"/>
+<path d="M60 38.5 V80.5" stroke="#008A2B" stroke-width="4.2" stroke-linecap="round"/></g>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="none" stroke="url(#rim)" stroke-width="2.4"/>
+</g>
+</svg>

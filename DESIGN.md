@@ -30,7 +30,7 @@ components:
 
 # RumBee — Sistema de Design
 
-Versão 1.2 · Outubro 2026 · **genérico, para qualquer produto RumBee**
+Versão 1.3 · Novembro 2026 · **genérico, para qualquer produto RumBee**
 
 Este documento define **como uma coisa é**: token, anatomia, medida, contraste.
 **Como uma coisa se comporta** — onde fica o CTA, o que o clique na linha faz, onde vive o
@@ -55,7 +55,8 @@ Produto de trabalho, para quem passa o dia dentro dele. Isso define tudo:
   tela, ação de registro no rodapé do modal.
 - **Neutro carrega a informação; âmbar carrega a decisão.**
 - **Nada decorativo.** Sem glassmorphism, sem gradiente de wallpaper, sem ilustração
-  genérica, sem card repetido só para preencher a grade.
+  genérica, sem card repetido só para preencher a grade. Única exceção: o launcher de
+  apps e os ícones de app (§4.11, §4.12).
 
 ### 1.2 As dez regras que mais quebram
 
@@ -283,7 +284,8 @@ do RumBee ID.
   ```
 
   O botão (40px) e o painel são do RumBee ID: não reestilize, não copie, não
-  reimplemente. `data-theme="auto"` acompanha o `data-theme` do `<html>`. O launcher
+  reimplemente. A anatomia do painel está em §4.11 e os ícones em §4.12: é a
+  especificação que o ID implementa, não um convite para o produto montar o seu. `data-theme="auto"` acompanha o `data-theme` do `<html>`. O launcher
   autentica com a sessão Clerk da página (§3.4); o contrato do token está no
   `packages/satellite-sdk` do repo `docsales/rumbee-ID`. Sem o slot, ele flutua no canto
   da tela, e isso é fallback, não layout.
@@ -500,6 +502,69 @@ Primeiro elemento de toda tela logada, a 28px do topbar.
 - Até o primeiro bloco: 16px (o `gap` do conteúdo).
 - Não é um `<header>` (`<header>` é landmark; use `<div>`).
 
+### 4.11 Launcher de apps
+
+O painel que abre do botão de apps do topbar (§3.2). **É implementado uma vez, no
+`launcher.js` do RumBee ID**; esta seção é a especificação dele. Produto nenhum monta o
+seu.
+
+- **Painel:** 380px, `--rb-radius-xl`, fundo `--launcher-bg` com
+  `backdrop-filter: blur(28px) saturate(170%)`, borda `1px solid var(--border)`, sombra
+  `var(--shadow-lg), var(--launcher-edge)`, padding `20px 20px 12px`, blocos em coluna com
+  `gap:16px` e divisor de 1px `--border` entre eles. Abre 8px abaixo do botão, alinhado à
+  direita dele. É o único painel translúcido do sistema.
+- **Título:** "Apps", estilo `h3`.
+- **Dois grupos de apps**, cada um com rótulo no estilo `label`: "Seus apps" (os que a
+  conta usa) e "Para experimentar" (os demais). Os dois grupos usam o ícone em cor cheia:
+  ícone cinza some na leitura e não convida ninguém a clicar.
+- **Grade:** 4 colunas, `gap:4px`. Cada app é um `<a>` em coluna: ícone 56px, 8px, nome
+  12.5px/500 em `--text`, padding `12px 4px 10px`, raio `--rb-radius-lg`.
+- **Nome curto no painel** ("Fin", "Meet"): o título e o contexto já dizem RumBee. É a
+  única exceção à regra de `BRAND.md` §6; fora do launcher o nome continua
+  `RumBee <Produto>`.
+- **App atual:** fundo `--row-hover`, nome em peso 600, ponto âmbar de 4px sob o nome e
+  `aria-current="page"`. Os três sinais juntos: cor sozinha não basta.
+- **Hover:** fundo `--row-hover` e ícone em `scale(1.06)`, 150ms no easing do sistema.
+  Foco pelo anel âmbar padrão. Com `prefers-reduced-motion`, sem escala.
+- **Link de descoberta:** "Descobrir outros apps RumBee" + seta, 44px, 13.5px/600 em
+  `--accent-ink`.
+- **Grupo "Mais":** lista de links de 40px, ícone de traço 18px em `--text-faint`, texto
+  13.5px/500 em `--text`. Link que sai do produto leva a seta diagonal de 14px à direita.
+  Rótulos previstos: Página inicial RumBee, Portal de ajuda, Fale conosco, Novidades,
+  Status dos serviços. **Os destinos ainda não existem**: cada linha só entra no ar quando
+  tiver URL real, e a lista some inteira se nenhuma tiver.
+- **Comportamento:** abre em clique, fecha com `Esc`, clique fora ou escolha. Se não
+  couber na janela, o painel rola por dentro (`max-height: calc(100vh - 96px)`), nunca a
+  página.
+
+Referência viva: `sistema.dc.html`, bloco "Launcher de apps".
+
+### 4.12 Ícones de app
+
+Um ícone por app da família, em `assets/apps/<app>.svg`. Substituem as silhuetas soltas
+(escudo, chave, corrente) que cada produto usava: agora todos dividem o mesmo contêiner.
+
+| Arquivo | App | Fundo (topo → base) | Glifo |
+|---|---|---|---|
+| `fin.svg` | RumBee Fin | `#4DF56E` → `#00A832` | escudo branco com cifrão |
+| `id.svg` | RumBee ID | `#323845` → `#050608` | chave dourada |
+| `link.svg` | RumBee Link | `#FF6B4F` → `#F0102E` | dois elos brancos |
+| `sign.svg` | RumBee Sign | `#3FAEFF` → `#0A47FF` | folha branca com assinatura |
+| `meet.svg` | RumBee Meet | `#A17DFF` → `#5A1DF2` | câmera branca |
+| `imob.svg` | RumBee Imob | `#22EBD3` → `#00A0B5` | casa branca |
+| `flows.svg` | RumBee Flows | `#FFDA4A` → `#FF9F0A` | três chevrons grafite |
+
+- **Anatomia, igual em todos:** `viewBox` 120, contêiner em superelipse, degradê vertical
+  de uma matiz só, brilho radial no canto superior esquerdo, sombra leve na base, glifo
+  com sombra da própria matiz e aro claro no topo. O glifo ocupa a área central de 60%.
+- **Estas cores não são tokens** e não entram em `tokens.css`: vivem dentro do SVG e
+  servem só para identificar o app. Nunca viram cor de botão, badge ou gráfico.
+- **Uso:** sempre o arquivo, quadrado, sem recolorir, recortar ou girar. 56px no
+  launcher; 16px é o mínimo. A sombra externa `--app-icon-shadow` só existe no launcher.
+- **Não é ícone de ação** nem substitui o logo RumBee na sidebar.
+- **App novo:** mesmo contêiner e mesmas camadas, uma matiz que nenhum outro usa e que
+  também difere em luminosidade das vizinhas na grade.
+
 ---
 
 ## 5. Padrões de produto
@@ -549,12 +614,14 @@ documentação do que existe, e alguém constrói em cima de uma invenção.
 - Texto branco sobre fill âmbar.
 - Sidebar clara no tema claro.
 - Ícone + logo na mesma barra.
-- Zebra em tabela, sombra em card, gradiente decorativo, glassmorphism.
+- Zebra em tabela, sombra em card, gradiente decorativo, glassmorphism. Degradê e
+  translucidez existem só nos ícones de app e no painel do launcher (§4.11, §4.12).
 - Bounce, elástico, animação acima de 320ms.
 - Emoji em interface.
 - Rolagem lateral em tabela que cabe.
 - Enum cru na interface.
-- Cor nova fora de `tokens.css`.
+- Cor nova fora de `tokens.css`. As cores dos ícones de app (§4.12) moram no SVG e não
+  saem dele.
 
 ---
 
@@ -598,13 +665,21 @@ rumbee-brand/
     ├── rumbee-beeline-stripe.png               faixa listrada
     ├── favicon-32/48/192/512.png               favicons
     ├── apple-touch-icon.png                    180px, fundo grafite
-    └── og-image.png                            1200×630 para compartilhamento
+    ├── og-image.png                            1200×630 para compartilhamento
+    └── apps/
+        └── fin, id, link, sign, meet, imob, flows .svg   ícones de app (§4.12)
 ```
 
 ---
 
 ## 11. Changelog
 
+- **1.3 · 2026-11-27** — Launcher de apps ganha especificação própria (§4.11): painel
+  translúcido, dois grupos de apps em cor cheia, app atual marcado e grupo "Mais" com
+  links de ajuda. Novos ícones de app em `assets/apps/` (§4.12), todos no mesmo contêiner,
+  no lugar das silhuetas soltas. Tokens novos: `--launcher-bg`, `--launcher-edge` e
+  `--app-icon-shadow`. Degradê e translucidez passam a ser permitidos só nessas duas
+  peças (§1.1, §8). O painel continua sendo implementado pelo RumBee ID.
 - **1.2.1 · 2026-11-13** — Radio marcado em `--accent-ink` e desmarcado como aro vazio
   nos dois temas (§2.2, §4.7), regra no `tokens.css`. Veio do FIN: no escuro, o radio
   desmarcado saía como disco branco, igual ao marcado, e o operador leu a opção errada

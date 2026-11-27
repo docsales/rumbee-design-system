@@ -96,7 +96,10 @@ Toda tela autenticada tem exatamente esta estrutura — não reinvente por tela:
 - **Launcher:** `<div id="rumbee-launcher-slot">` no topbar + `<script
   src="https://id.rumbee.ai/launcher.js" data-container="#rumbee-launcher-slot"
   data-theme="auto" data-lang="pt" defer>`. Botão e painel são do ID: não reestilize nem
-  reimplemente (`DESIGN.md` §3.2).
+  reimplemente (`DESIGN.md` §3.2; a anatomia do painel está em §4.11).
+- **Ícone de app:** sempre o arquivo de `assets/apps/<app>.svg`, quadrado, sem recolorir.
+  As cores dele não são tokens: não use em botão, badge ou gráfico (`DESIGN.md` §4.12).
+  Degradê e translucidez só existem nesses ícones e no painel do launcher.
 - **O usuário mora no rodapé da sidebar** (avatar 28px + nome + e-mail → menu para cima,
   nesta ordem): e-mail · Alternar tema · Idioma (se houver) · Gerenciar conta (painel do
   RumBee ID) · — · Termos de uso · Política de privacidade · — · Encerrar sessão

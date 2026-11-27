@@ -1,6 +1,6 @@
 # RumBee Brand Book — pacote de design para desenvolvimento com IA
 
-Versão 1.2 · Outubro 2026
+Versão 1.3 · Novembro 2026
 
 Este pacote é o **ponto de partida de qualquer produto RumBee**. Ele não descreve um
 produto específico: descreve a marca, os tokens e os padrões de interface que todo
@@ -20,7 +20,7 @@ existentes em migração + 2 apps novos) devem começar daqui, não de uma cópi
 | `support.js` | Runtime (React) que roda as páginas `.dc.html` — gerado, não editar à mão | — |
 | `AI-AGENT.md` | Instruções operacionais para agentes de IA que geram código | **cole isto no prompt** |
 | `tokens.css` | Implementação dos tokens em CSS custom properties, dark + light | dev |
-| `assets/` | Logos, ícone, favicons, apple-touch-icon, og-image | todos |
+| `assets/` | Logos, ícone, favicons, apple-touch-icon, og-image e, em `assets/apps/`, os ícones de app do launcher | todos |
 | `migration-playbook.html` | Este README em formato de página, com os dois prompts prontos pra copiar | quem vai rodar a migração |
 
 ## As duas páginas e o Artifact

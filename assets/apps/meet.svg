@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<defs>
+<linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#A17DFF"/><stop offset="1" stop-color="#5A1DF2"/></linearGradient>
+<radialGradient id="hl" gradientUnits="userSpaceOnUse" cx="34" cy="8" r="92"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".5" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="rim" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="60" y2="120"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/><stop offset=".8" stop-color="#000" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+<linearGradient id="floor" gradientUnits="userSpaceOnUse" x1="60" y1="70" x2="60" y2="120"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+<linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="60" y1="26" x2="60" y2="96"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".86"/></linearGradient>
+<filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="3.2" flood-color="#25097A" flood-opacity=".38"/></filter>
+<clipPath id="c"><path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z"/></clipPath>
+
+</defs>
+<g clip-path="url(#c)">
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#bg)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#hl)"/>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="url(#floor)"/>
+<g filter="url(#sh)">
+<path d="M77 56 L93 46.5 V73.5 L77 64 Z" fill="#fff" fill-opacity=".66" stroke="#fff" stroke-opacity=".66" stroke-width="5" stroke-linejoin="round"/>
+<rect x="27" y="41" width="47" height="38" rx="11" fill="url(#gl)"/></g>
+<path d="M0,60 C0,8 8,0 60,0 S120,8 120,60 112,120 60,120 0,112 0,60 Z" fill="none" stroke="url(#rim)" stroke-width="2.4"/>
+</g>
+</svg>
